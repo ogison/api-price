@@ -1,5 +1,6 @@
 'use client';
 
+import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { PROVIDER_CONFIG } from '@/lib/constants/providers';
@@ -42,12 +43,15 @@ export function PricingFilters({
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
-      <Input
-        placeholder="Search models..."
-        value={searchQuery}
-        onChange={(e) => onSearchChange(e.target.value)}
-        className="max-w-xs"
-      />
+      <div className="relative max-w-xs">
+        <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          placeholder="Search models..."
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="pl-8"
+        />
+      </div>
     </div>
   );
 }

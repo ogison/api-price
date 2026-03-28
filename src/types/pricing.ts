@@ -12,6 +12,8 @@ export interface ModelPricing {
   longContextCachedInputPrice?: number; // USD per 1M cached input tokens (long context)
   longContextOutputPrice?: number; // USD per 1M output tokens (long context)
   contextWindow: number; // max context in tokens
+  releaseDate?: string; // YYYY-MM-DD format
+  deprecationDate?: string; // YYYY-MM-DD format
   notes?: string;
 }
 
@@ -21,6 +23,8 @@ export type SortField =
   | 'inputPrice'
   | 'cachedInputPrice'
   | 'outputPrice'
-  | 'contextWindow';
+  | 'contextWindow'
+  | 'releaseDate'
+  | 'deprecationDate';
 
 export type SortDirection = 'asc' | 'desc';

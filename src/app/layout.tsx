@@ -1,4 +1,8 @@
 import type { Metadata } from 'next';
+import { Coins } from 'lucide-react';
+import { ThemeProvider } from '@/components/layout/theme-provider';
+import { ThemeToggle } from '@/components/layout/theme-toggle';
+import { CurrencyProvider } from '@/context/currency-context';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -13,8 +17,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col antialiased">
+        <ThemeProvider>
+          <CurrencyProvider>
+            <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+              <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+                <div className="flex items-center gap-2">
+                  <Coins className="h-5 w-5 text-primary" />
+                  <span className="text-lg font-semibold tracking-tight">
+                    API Price Comparison
+                  </span>
+                </div>
+                <ThemeToggle />
+              </div>
+            </header>
+            {children}
+            <footer className="mt-auto border-t py-6 text-center text-sm text-muted-foreground">
+              <p>
+                Data sources: OpenAI, Google Cloud, Anthropic official pricing
+                pages
+              </p>
+            </footer>
+          </CurrencyProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -13,6 +13,7 @@ export const PRICING_DATA: ModelPricing[] = [
     longContextCachedInputPrice: 0.5,
     longContextOutputPrice: 22.5,
     contextWindow: 1_000_000,
+    releaseDate: '2026-03-05',
   },
   {
     id: 'gpt-5.4-mini',
@@ -22,6 +23,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.075,
     outputPrice: 4.5,
     contextWindow: 1_000_000,
+    releaseDate: '2026-03-17',
   },
   {
     id: 'gpt-5.4-nano',
@@ -31,6 +33,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.02,
     outputPrice: 1.25,
     contextWindow: 1_000_000,
+    releaseDate: '2026-03-17',
   },
   {
     id: 'gpt-5.4-pro',
@@ -41,6 +44,7 @@ export const PRICING_DATA: ModelPricing[] = [
     longContextInputPrice: 60.0,
     longContextOutputPrice: 270.0,
     contextWindow: 1_000_000,
+    releaseDate: '2026-03-05',
   },
 
   // OpenAI — GPT-5.x series
@@ -52,6 +56,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.175,
     outputPrice: 14.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-12-11',
   },
   {
     id: 'gpt-5.2-pro',
@@ -60,6 +65,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 21.0,
     outputPrice: 168.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-12-11',
   },
   {
     id: 'gpt-5.1',
@@ -69,6 +75,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.125,
     outputPrice: 10.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-11-13',
   },
   {
     id: 'gpt-5',
@@ -78,6 +85,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.125,
     outputPrice: 10.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-08-07',
   },
   {
     id: 'gpt-5-mini',
@@ -87,6 +95,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.025,
     outputPrice: 2.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-08-07',
   },
   {
     id: 'gpt-5-nano',
@@ -96,6 +105,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.005,
     outputPrice: 0.4,
     contextWindow: 1_000_000,
+    releaseDate: '2025-08-07',
   },
   {
     id: 'gpt-5-pro',
@@ -104,6 +114,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 15.0,
     outputPrice: 120.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-10-06',
   },
 
   // OpenAI — GPT-4.1 series
@@ -115,6 +126,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.5,
     outputPrice: 8.0,
     contextWindow: 1_000_000,
+    releaseDate: '2025-04-14',
   },
   {
     id: 'gpt-4.1-mini',
@@ -124,6 +136,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.1,
     outputPrice: 1.6,
     contextWindow: 1_000_000,
+    releaseDate: '2025-04-14',
   },
   {
     id: 'gpt-4.1-nano',
@@ -133,6 +146,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.025,
     outputPrice: 0.4,
     contextWindow: 1_000_000,
+    releaseDate: '2025-04-14',
   },
   {
     id: 'gpt-4o',
@@ -142,6 +156,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 1.25,
     outputPrice: 10.0,
     contextWindow: 128_000,
+    releaseDate: '2024-05-13',
   },
   {
     id: 'gpt-4o-mini',
@@ -151,6 +166,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.075,
     outputPrice: 0.6,
     contextWindow: 128_000,
+    releaseDate: '2024-07-18',
   },
   {
     id: 'o3',
@@ -160,6 +176,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.5,
     outputPrice: 8.0,
     contextWindow: 200_000,
+    releaseDate: '2025-04-16',
   },
   {
     id: 'o3-mini',
@@ -169,6 +186,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.55,
     outputPrice: 4.4,
     contextWindow: 200_000,
+    releaseDate: '2025-01-31',
   },
   {
     id: 'o4-mini',
@@ -178,6 +196,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.275,
     outputPrice: 4.4,
     contextWindow: 200_000,
+    releaseDate: '2025-04-16',
   },
   {
     id: 'o3-pro',
@@ -186,6 +205,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 20.0,
     outputPrice: 80.0,
     contextWindow: 200_000,
+    releaseDate: '2025-06-10',
   },
   {
     id: 'o1',
@@ -195,6 +215,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 7.5,
     outputPrice: 60.0,
     contextWindow: 200_000,
+    releaseDate: '2024-12-17',
   },
   {
     id: 'o1-mini',
@@ -204,6 +225,8 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.55,
     outputPrice: 4.4,
     contextWindow: 128_000,
+    releaseDate: '2024-09-12',
+    deprecationDate: '2025-10-27',
   },
   {
     id: 'o1-pro',
@@ -212,6 +235,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 150.0,
     outputPrice: 600.0,
     contextWindow: 200_000,
+    releaseDate: '2025-03-19',
   },
 
   // OpenAI — Legacy models
@@ -222,6 +246,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 5.0,
     outputPrice: 15.0,
     contextWindow: 128_000,
+    releaseDate: '2024-05-13',
   },
   {
     id: 'gpt-4-turbo-2024-04-09',
@@ -230,6 +255,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 10.0,
     outputPrice: 30.0,
     contextWindow: 128_000,
+    releaseDate: '2024-04-09',
   },
   {
     id: 'gpt-4-0125-preview',
@@ -238,6 +264,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 10.0,
     outputPrice: 30.0,
     contextWindow: 128_000,
+    releaseDate: '2024-01-25',
+    deprecationDate: '2026-03-26',
   },
   {
     id: 'gpt-4-1106-preview',
@@ -246,6 +274,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 10.0,
     outputPrice: 30.0,
     contextWindow: 128_000,
+    releaseDate: '2023-11-06',
+    deprecationDate: '2026-03-26',
   },
   {
     id: 'gpt-4-1106-vision-preview',
@@ -254,6 +284,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 10.0,
     outputPrice: 30.0,
     contextWindow: 128_000,
+    releaseDate: '2023-11-06',
+    deprecationDate: '2024-12-06',
   },
   {
     id: 'gpt-4-0613',
@@ -262,6 +294,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 30.0,
     outputPrice: 60.0,
     contextWindow: 8_192,
+    releaseDate: '2023-06-13',
   },
   {
     id: 'gpt-4-0314',
@@ -270,6 +303,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 30.0,
     outputPrice: 60.0,
     contextWindow: 8_192,
+    releaseDate: '2023-03-14',
+    deprecationDate: '2026-03-26',
   },
   {
     id: 'gpt-4-32k',
@@ -278,6 +313,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 60.0,
     outputPrice: 120.0,
     contextWindow: 32_768,
+    releaseDate: '2023-03-14',
+    deprecationDate: '2025-06-06',
   },
   {
     id: 'gpt-3.5-turbo',
@@ -286,6 +323,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.5,
     outputPrice: 1.5,
     contextWindow: 16_385,
+    releaseDate: '2023-03-01',
   },
   {
     id: 'gpt-3.5-turbo-0125',
@@ -294,6 +332,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.5,
     outputPrice: 1.5,
     contextWindow: 16_385,
+    releaseDate: '2024-01-25',
   },
   {
     id: 'gpt-3.5-turbo-1106',
@@ -302,6 +341,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 1.0,
     outputPrice: 2.0,
     contextWindow: 16_385,
+    releaseDate: '2023-11-06',
+    deprecationDate: '2026-09-28',
   },
   {
     id: 'gpt-3.5-turbo-0613',
@@ -310,6 +351,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 1.5,
     outputPrice: 2.0,
     contextWindow: 16_385,
+    releaseDate: '2023-06-13',
+    deprecationDate: '2024-09-13',
   },
   {
     id: 'gpt-3.5-0301',
@@ -318,6 +361,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 1.5,
     outputPrice: 2.0,
     contextWindow: 4_096,
+    releaseDate: '2023-03-01',
+    deprecationDate: '2024-09-13',
   },
   {
     id: 'gpt-3.5-turbo-instruct',
@@ -326,6 +371,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 1.5,
     outputPrice: 2.0,
     contextWindow: 4_096,
+    releaseDate: '2023-09-19',
+    deprecationDate: '2026-09-28',
   },
   {
     id: 'gpt-3.5-turbo-16k-0613',
@@ -334,6 +381,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 3.0,
     outputPrice: 4.0,
     contextWindow: 16_385,
+    releaseDate: '2023-06-13',
+    deprecationDate: '2024-09-13',
   },
   {
     id: 'davinci-002',
@@ -342,6 +391,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 2.0,
     outputPrice: 2.0,
     contextWindow: 16_384,
+    releaseDate: '2023-07-06',
+    deprecationDate: '2026-09-28',
   },
   {
     id: 'babbage-002',
@@ -350,6 +401,8 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.4,
     outputPrice: 0.4,
     contextWindow: 16_384,
+    releaseDate: '2023-07-06',
+    deprecationDate: '2026-09-28',
   },
 
   // OpenAI — Image generation（https://developers.openai.com/api/docs/pricing）
@@ -361,6 +414,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 2.0,
     outputPrice: 32.0,
     contextWindow: 0,
+    releaseDate: '2025-12-16',
     notes:
       '画像生成。枚単価は画像生成ガイドの Calculating costs を参照（公式）',
   },
@@ -372,6 +426,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 1.25,
     outputPrice: 10.0,
     contextWindow: 0,
+    releaseDate: '2025-12-16',
     notes: '画像生成フロー内の Text modality。枚単価は画像生成ガイドを参照',
   },
   {
@@ -382,6 +437,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.25,
     outputPrice: 8.0,
     contextWindow: 0,
+    releaseDate: '2025-10-06',
     notes:
       '画像生成。枚単価は画像生成ガイドの Calculating costs を参照（公式）',
   },
@@ -392,6 +448,7 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 2.0,
     cachedInputPrice: 0.2,
     contextWindow: 0,
+    releaseDate: '2025-10-06',
     notes: 'Text modality。Output は公式価格表で「—」（要公式確認）',
   },
   {
@@ -402,6 +459,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 1.0,
     outputPrice: 16.0,
     contextWindow: 0,
+    releaseDate: '2025-12-16',
     notes: 'Batch API。枚単価は画像生成ガイドを参照',
   },
   {
@@ -412,6 +470,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.63,
     outputPrice: 5.0,
     contextWindow: 0,
+    releaseDate: '2025-12-16',
     notes: 'Batch API / Text modality',
   },
   {
@@ -422,6 +481,7 @@ export const PRICING_DATA: ModelPricing[] = [
     cachedInputPrice: 0.13,
     outputPrice: 4.0,
     contextWindow: 0,
+    releaseDate: '2025-10-06',
     notes: 'Batch API。枚単価は画像生成ガイドを参照',
   },
   {
@@ -431,72 +491,354 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 1.0,
     cachedInputPrice: 0.1,
     contextWindow: 0,
+    releaseDate: '2025-10-06',
     notes: 'Batch / Text modality。Output は公式表で「—」',
   },
 
-  // Anthropic
+  // Anthropic（https://platform.claude.com/docs/en/about-claude/pricing）
+  {
+    id: 'claude-opus-4-6',
+    provider: 'anthropic',
+    model: 'Claude Opus 4.6',
+    inputPrice: 5.0,
+    cachedInputPrice: 0.5,
+    outputPrice: 25.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-02-05',
+    notes:
+      '1M コンテキストは標準単価（長文プレミアムなし）。Fast mode・Batch・キャッシュは公式 pricing 参照',
+  },
+  {
+    id: 'claude-sonnet-4-6',
+    provider: 'anthropic',
+    model: 'Claude Sonnet 4.6',
+    inputPrice: 3.0,
+    cachedInputPrice: 0.3,
+    outputPrice: 15.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-02-17',
+    notes:
+      '1M コンテキストは標準単価（長文プレミアムなし）。Batch・キャッシュは公式 pricing 参照',
+  },
+  {
+    id: 'claude-haiku-4-5',
+    provider: 'anthropic',
+    model: 'Claude Haiku 4.5',
+    inputPrice: 1.0,
+    cachedInputPrice: 0.1,
+    outputPrice: 5.0,
+    contextWindow: 200_000,
+    releaseDate: '2025-10-01',
+  },
+  {
+    id: 'claude-opus-4-5',
+    provider: 'anthropic',
+    model: 'Claude Opus 4.5',
+    inputPrice: 5.0,
+    cachedInputPrice: 0.5,
+    outputPrice: 25.0,
+    contextWindow: 200_000,
+    releaseDate: '2025-11-01',
+  },
+  {
+    id: 'claude-sonnet-4-5',
+    provider: 'anthropic',
+    model: 'Claude Sonnet 4.5',
+    inputPrice: 3.0,
+    cachedInputPrice: 0.3,
+    outputPrice: 15.0,
+    longContextInputPrice: 6.0,
+    longContextCachedInputPrice: 0.6,
+    longContextOutputPrice: 22.5,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-09-29',
+    notes:
+      '最大 1M は beta ヘッダ context-1m-2025-08-07 が必要。入力合計 >200K トークンでリクエスト全体が長文レート（入力 $6・出力 $22.5 / MTok）',
+  },
+  {
+    id: 'claude-opus-4-1',
+    provider: 'anthropic',
+    model: 'Claude Opus 4.1',
+    inputPrice: 15.0,
+    cachedInputPrice: 1.5,
+    outputPrice: 75.0,
+    contextWindow: 200_000,
+    releaseDate: '2025-08-05',
+  },
   {
     id: 'claude-opus-4',
     provider: 'anthropic',
     model: 'Claude Opus 4',
     inputPrice: 15.0,
+    cachedInputPrice: 1.5,
     outputPrice: 75.0,
     contextWindow: 200_000,
+    releaseDate: '2025-05-14',
   },
   {
     id: 'claude-sonnet-4',
     provider: 'anthropic',
     model: 'Claude Sonnet 4',
     inputPrice: 3.0,
+    cachedInputPrice: 0.3,
     outputPrice: 15.0,
-    contextWindow: 200_000,
+    longContextInputPrice: 6.0,
+    longContextCachedInputPrice: 0.6,
+    longContextOutputPrice: 22.5,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-05-14',
+    notes:
+      '最大 1M は beta ヘッダ context-1m-2025-08-07 が必要。入力合計 >200K トークンでリクエスト全体が長文レート',
   },
   {
     id: 'claude-haiku-3.5',
     provider: 'anthropic',
     model: 'Claude Haiku 3.5',
     inputPrice: 0.8,
+    cachedInputPrice: 0.08,
     outputPrice: 4.0,
     contextWindow: 200_000,
+    releaseDate: '2024-11-04',
+    deprecationDate: '2026-02-19',
+  },
+  {
+    id: 'claude-sonnet-3-7',
+    provider: 'anthropic',
+    model: 'Claude Sonnet 3.7',
+    inputPrice: 3.0,
+    cachedInputPrice: 0.3,
+    outputPrice: 15.0,
+    contextWindow: 200_000,
+    releaseDate: '2025-02-24',
+    deprecationDate: '2026-02-19',
+    notes:
+      'deprecated。model deprecations を参照し新モデルへ移行推奨（https://platform.claude.com/docs/en/about-claude/model-deprecations）',
+  },
+  {
+    id: 'claude-haiku-3',
+    provider: 'anthropic',
+    model: 'Claude Haiku 3',
+    inputPrice: 0.25,
+    cachedInputPrice: 0.03,
+    outputPrice: 1.25,
+    contextWindow: 200_000,
+    releaseDate: '2024-03-14',
+    deprecationDate: '2026-04-20',
+    notes: 'deprecated（2026-04-20 退役予定）。Haiku 4.5 へ移行推奨',
+  },
+  {
+    id: 'claude-opus-3',
+    provider: 'anthropic',
+    model: 'Claude Opus 3',
+    inputPrice: 15.0,
+    cachedInputPrice: 1.5,
+    outputPrice: 75.0,
+    contextWindow: 200_000,
+    releaseDate: '2024-03-04',
+    deprecationDate: '2026-01-05',
+    notes: 'deprecated。model deprecations を参照し新モデルへ移行推奨',
   },
 
-  // Google (Vertex AI)
+  // Google (Vertex AI) — Standard トークン単価（https://cloud.google.com/vertex-ai/generative-ai/pricing）
+  // Gemini 3（Preview）
+  {
+    id: 'gemini-3.1-pro-preview',
+    provider: 'google',
+    model: 'Gemini 3.1 Pro Preview',
+    inputPrice: 2.0,
+    cachedInputPrice: 0.2,
+    outputPrice: 12.0,
+    longContextInputPrice: 4.0,
+    longContextCachedInputPrice: 0.4,
+    longContextOutputPrice: 18.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-02-19',
+    notes:
+      'Preview。>200K 入力コンテキストで長文料金。Vertex AI Generative AI 料金表 Standard 参照',
+  },
+  {
+    id: 'gemini-3-pro-preview',
+    provider: 'google',
+    model: 'Gemini 3 Pro Preview',
+    inputPrice: 2.0,
+    cachedInputPrice: 0.2,
+    outputPrice: 12.0,
+    longContextInputPrice: 4.0,
+    longContextCachedInputPrice: 0.4,
+    longContextOutputPrice: 18.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-11-18',
+    deprecationDate: '2026-03-09',
+    notes:
+      'Preview。3.1 Pro Preview と同一トークン単価（表上）。>200K で長文料金',
+  },
+  {
+    id: 'gemini-3-flash-preview',
+    provider: 'google',
+    model: 'Gemini 3 Flash Preview',
+    inputPrice: 0.5,
+    cachedInputPrice: 0.05,
+    outputPrice: 3.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-12-17',
+    notes:
+      'Preview。音声入力は $1/M（cached $0.1/M）。text/image/video は表記の通り',
+  },
+  {
+    id: 'gemini-3.1-flash-lite-preview',
+    provider: 'google',
+    model: 'Gemini 3.1 Flash-Lite Preview',
+    inputPrice: 0.25,
+    cachedInputPrice: 0.03,
+    outputPrice: 1.5,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-03-03',
+    notes: 'Preview。音声入力は $0.5/M（cached $0.05/M）',
+  },
+  {
+    id: 'gemini-3.1-flash-image-preview',
+    provider: 'google',
+    model: 'Gemini 3.1 Flash Image Preview',
+    inputPrice: 0.5,
+    outputPrice: 3.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-02-26',
+    notes:
+      'Preview。画像出力 $60/M image tokens（解像度でトークン数変動）。Vertex 料金表参照',
+  },
+  {
+    id: 'gemini-3-pro-image-preview',
+    provider: 'google',
+    model: 'Gemini 3 Pro Image Preview',
+    inputPrice: 2.0,
+    outputPrice: 12.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-11-20',
+    notes:
+      'Preview。画像出力 $120/M image tokens。入力画像 560 tokens/枚など — 公式注記参照',
+  },
+
+  // Gemini 2.5
   {
     id: 'gemini-2.5-pro',
     provider: 'google',
     model: 'Gemini 2.5 Pro',
     inputPrice: 1.25,
+    cachedInputPrice: 0.13,
+    outputPrice: 10.0,
+    longContextInputPrice: 2.5,
+    longContextCachedInputPrice: 0.25,
+    longContextOutputPrice: 15.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-06-17',
+    deprecationDate: '2026-06-17',
+    notes: '>200K 入力コンテキストで長文料金（入力・出力とも長文レート）',
+  },
+  {
+    id: 'gemini-2.5-pro-computer-use-preview',
+    provider: 'google',
+    model: 'Gemini 2.5 Pro Computer Use Preview',
+    inputPrice: 1.25,
     outputPrice: 10.0,
     longContextInputPrice: 2.5,
     longContextOutputPrice: 15.0,
     contextWindow: 1_000_000,
-    notes: '>200K tokens で長文料金適用',
+    releaseDate: '2025-10-07',
+    notes:
+      'Computer Use。課金 SKU は Gemini 2.5 Pro と同一 — コスト分割は billing tags 利用（公式）',
   },
   {
     id: 'gemini-2.5-flash',
     provider: 'google',
     model: 'Gemini 2.5 Flash',
-    inputPrice: 0.15,
-    outputPrice: 0.6,
-    longContextInputPrice: 0.6,
-    longContextOutputPrice: 2.4,
+    inputPrice: 0.3,
+    cachedInputPrice: 0.03,
+    outputPrice: 2.5,
     contextWindow: 1_000_000,
-    notes: '>200K tokens で長文料金適用',
+    releaseDate: '2025-06-17',
+    deprecationDate: '2026-06-17',
+    notes:
+      'text/image/video 入力。音声入力 $1/M（cached $0.1/M）。>200K でも入力・出力単価は表と同額（長文列）',
   },
+  {
+    id: 'gemini-2.5-flash-lite',
+    provider: 'google',
+    model: 'Gemini 2.5 Flash-Lite',
+    inputPrice: 0.1,
+    cachedInputPrice: 0.01,
+    outputPrice: 0.4,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-07-22',
+    deprecationDate: '2026-07-22',
+    notes: 'text/image/video 入力。音声入力 $0.3/M（cached $0.03/M）',
+  },
+  {
+    id: 'gemini-2.5-flash-image',
+    provider: 'google',
+    model: 'Gemini 2.5 Flash Image',
+    inputPrice: 0.3,
+    outputPrice: 2.5,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-10-02',
+    deprecationDate: '2026-10-02',
+    notes:
+      'テキスト応答は上記。画像出力 $30/M image tokens（解像度でトークン数変動）',
+  },
+  {
+    id: 'gemini-2.5-flash-live-api',
+    provider: 'google',
+    model: 'Gemini 2.5 Flash Live API',
+    inputPrice: 0.5,
+    outputPrice: 2.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-12-12',
+    notes:
+      'テキスト入出。音声入 $3/M、映像・画像入 $3/M、音声出 $12/M。セッションはターンごとにコンテキスト内トークン再課金（公式）',
+  },
+
+  // Gemini 2.0
   {
     id: 'gemini-2.0-flash',
     provider: 'google',
     model: 'Gemini 2.0 Flash',
-    inputPrice: 0.1,
-    outputPrice: 0.4,
+    inputPrice: 0.15,
+    outputPrice: 0.6,
     contextWindow: 1_000_000,
+    releaseDate: '2025-02-05',
+    deprecationDate: '2026-06-01',
+    notes: 'トークン課金（Standard）。音声入力 $1/M。Batch API は別単価',
   },
   {
     id: 'gemini-2.0-flash-lite',
     provider: 'google',
-    model: 'Gemini 2.0 Flash Lite',
+    model: 'Gemini 2.0 Flash-Lite',
     inputPrice: 0.075,
     outputPrice: 0.3,
     contextWindow: 1_000_000,
+    releaseDate: '2025-02-25',
+    deprecationDate: '2026-06-01',
+    notes: 'Batch API は入力・出力とも約半額（公式）',
+  },
+  {
+    id: 'gemini-2.0-flash-image-generation',
+    provider: 'google',
+    model: 'Gemini 2.0 Flash Image Generation',
+    inputPrice: 0.15,
+    outputPrice: 0.6,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-05-07',
+    notes:
+      'テキスト入出は上記。映像入 $3/M、画像出力 $30/M image tokens、音声入 $1/M',
+  },
+  {
+    id: 'gemini-2.0-flash-live-api',
+    provider: 'google',
+    model: 'Gemini 2.0 Flash Live API',
+    inputPrice: 0.5,
+    outputPrice: 2.0,
+    contextWindow: 1_000_000,
+    releaseDate: '2025-04-09',
+    notes:
+      'テキスト入出。音声入 $3/M、映像・画像入 $3/M、音声出 $12/M（Preview 注記あり）',
   },
 ];
