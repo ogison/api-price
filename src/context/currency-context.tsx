@@ -7,15 +7,16 @@ import {
   useMemo,
   useState,
 } from 'react';
+import exchangeRatesData from '@/lib/constants/exchange-rates.json';
 
 export type Currency = 'USD' | 'JPY' | 'EUR' | 'GBP';
 export type TokenUnit = '1M' | '1K';
 
 const EXCHANGE_RATES: Record<Currency, number> = {
-  USD: 1,
-  JPY: 150,
-  EUR: 0.92,
-  GBP: 0.79,
+  USD: exchangeRatesData.USD,
+  JPY: exchangeRatesData.JPY,
+  EUR: exchangeRatesData.EUR,
+  GBP: exchangeRatesData.GBP,
 };
 
 const CURRENCY_SYMBOLS: Record<Currency, string> = {
