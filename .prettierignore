@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# Build output
+.next
+out
+dist
+build
+
+# Cache
+.cache
+
+# Package manager
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
