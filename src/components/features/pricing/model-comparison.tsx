@@ -8,23 +8,46 @@ import {
   formatContextWindow,
   formatPrice,
   formatReleaseDate,
+  isDeprecated,
 } from '@/lib/helpers/format';
-import type { ModelPricing } from '@/types/pricing';
+import type { ModelPricing, Provider } from '@/types/pricing';
 import { ProviderBadge } from './provider-badge';
 
 const MAX_COMPARE = 4;
 
-export function ModelComparison() {
+interface ModelComparisonProps {
+  activeProviders: Provider[];
+  searchQuery: string;
+  includeDeprecated: boolean;
+}
+
+export function ModelComparison({
+  activeProviders,
+  searchQuery,
+  includeDeprecated,
+}: ModelComparisonProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [search, setSearch] = useState('');
+
+  const filteredModels = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return PRICING_DATA.filter(
+      (m) =>
+        activeProviders.includes(m.provider) &&
+        (q === '' || m.model.toLowerCase().includes(q)) &&
+        (includeDeprecated || !isDeprecated(m.deprecationDate))
+    );
+  }, [activeProviders, searchQuery, includeDeprecated]);
 
   const suggestions = useMemo(() => {
     if (!search) return [];
     const q = search.toLowerCase();
-    return PRICING_DATA.filter(
-      (m) => m.model.toLowerCase().includes(q) && !selectedIds.includes(m.id)
-    ).slice(0, 8);
-  }, [search, selectedIds]);
+    return filteredModels
+      .filter(
+        (m) => m.model.toLowerCase().includes(q) && !selectedIds.includes(m.id)
+      )
+      .slice(0, 8);
+  }, [search, selectedIds, filteredModels]);
 
   const selectedModels = useMemo(
     () =>

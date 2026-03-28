@@ -1,0 +1,62 @@
+name: Update Pricing Data
+
+on:
+  schedule:
+    - cron: '0 1 * * 1,4' # Mon & Thu at 01:00 UTC (10:00 JST)
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-pricing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run pricing update script
+        id: update
+        run: |
+          pnpm tsx scripts/update-pricing/index.ts 2>&1 | tee /tmp/update-report.txt
+          echo "has_changes=$(git diff --quiet && echo 'false' || echo 'true')" >> $GITHUB_OUTPUT
+
+      - name: Format updated files
+        if: steps.update.outputs.has_changes == 'true'
+        run: pnpm format
+
+      - name: Create Pull Request
+        if: steps.update.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automated/pricing-update
+          title: 'chore: update pricing data'
+          body-path: /tmp/update-report.txt
+          labels: pricing-update,automated
+          commit-message: 'chore: update pricing data from official sources'
+
+      - name: Create Issue on Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Pricing update failed',
+              body: `The automated pricing update workflow failed.\n\n[Workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+              labels: ['pricing-update', 'bug']
+            });

@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
+import { formatReleaseDate, isDeprecated } from '@/lib/helpers/format';
 import type { Provider } from '@/types/pricing';
 import { ProviderBadge } from './provider-badge';
 
@@ -21,9 +22,19 @@ function formatCost(cost: number): string {
   return `$${cost.toFixed(2)}`;
 }
 
-const ALL_PROVIDERS: Provider[] = ['openai', 'google', 'anthropic'];
+interface CostSimulatorProps {
+  activeProviders: Provider[];
+  searchQuery: string;
+  isLongContext: boolean;
+  includeDeprecated: boolean;
+}
 
-export function CostSimulator() {
+export function CostSimulator({
+  activeProviders,
+  searchQuery,
+  isLongContext,
+  includeDeprecated,
+}: CostSimulatorProps) {
   const [inputTokens, setInputTokens] = useState('');
   const [outputTokens, setOutputTokens] = useState('');
   const [requestCount, setRequestCount] = useState('1');
@@ -42,17 +53,30 @@ export function CostSimulator() {
     const cachedTokens = totalInputTokens * cache;
     const uncachedTokens = totalInputTokens - cachedTokens;
 
+    const q = searchQuery.toLowerCase();
     return PRICING_DATA.filter(
-      (m) => ALL_PROVIDERS.includes(m.provider) && m.outputPrice != null
+      (m) =>
+        activeProviders.includes(m.provider) &&
+        m.outputPrice != null &&
+        (q === '' || m.model.toLowerCase().includes(q)) &&
+        (includeDeprecated || !isDeprecated(m.deprecationDate))
     )
       .map((m) => {
-        const inputCost = (uncachedTokens / 1_000_000) * m.inputPrice;
+        const inPrice = isLongContext
+          ? (m.longContextInputPrice ?? m.inputPrice)
+          : m.inputPrice;
+        const cachePrice = isLongContext
+          ? (m.longContextCachedInputPrice ?? m.cachedInputPrice)
+          : m.cachedInputPrice;
+        const outPrice = isLongContext
+          ? (m.longContextOutputPrice ?? m.outputPrice)
+          : m.outputPrice;
+        const inputCost = (uncachedTokens / 1_000_000) * inPrice;
         const cachedCost =
-          m.cachedInputPrice != null
-            ? (cachedTokens / 1_000_000) * m.cachedInputPrice
-            : (cachedTokens / 1_000_000) * m.inputPrice;
-        const outputCost =
-          (totalOutputTokens / 1_000_000) * (m.outputPrice ?? 0);
+          cachePrice != null
+            ? (cachedTokens / 1_000_000) * cachePrice
+            : (cachedTokens / 1_000_000) * inPrice;
+        const outputCost = (totalOutputTokens / 1_000_000) * (outPrice ?? 0);
         const totalCost = inputCost + cachedCost + outputCost;
 
         return {
@@ -62,10 +86,21 @@ export function CostSimulator() {
           totalCost,
           inputCost: inputCost + cachedCost,
           outputCost,
+          releaseDate: m.releaseDate,
+          deprecationDate: m.deprecationDate,
         };
       })
       .sort((a, b) => a.totalCost - b.totalCost);
-  }, [inputTokens, outputTokens, requestCount, cacheRate]);
+  }, [
+    inputTokens,
+    outputTokens,
+    requestCount,
+    cacheRate,
+    activeProviders,
+    searchQuery,
+    isLongContext,
+    includeDeprecated,
+  ]);
 
   return (
     <div className="space-y-4">
@@ -132,10 +167,12 @@ export function CostSimulator() {
                 <TableHead className="text-right">Input Cost</TableHead>
                 <TableHead className="text-right">Output Cost</TableHead>
                 <TableHead className="text-right">Total Cost</TableHead>
+                <TableHead>Release</TableHead>
+                <TableHead>Deprecation</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {results.slice(0, 20).map((r, i) => (
+              {results.slice(0, 100).map((r, i) => (
                 <TableRow
                   key={r.id}
                   className="even:bg-muted/30 transition-colors"
@@ -155,6 +192,12 @@ export function CostSimulator() {
                   </TableCell>
                   <TableCell className="text-right font-mono font-semibold">
                     {formatCost(r.totalCost)}
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    {formatReleaseDate(r.releaseDate)}
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    {formatReleaseDate(r.deprecationDate)}
                   </TableCell>
                 </TableRow>
               ))}

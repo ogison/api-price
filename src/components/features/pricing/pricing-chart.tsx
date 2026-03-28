@@ -12,6 +12,7 @@ import {
   YAxis,
 } from 'recharts';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
+import { isDeprecated } from '@/lib/helpers/format';
 import type { Provider } from '@/types/pricing';
 
 const PROVIDER_COLORS: Record<Provider, string> = {
@@ -26,7 +27,19 @@ const PROVIDER_LABELS: Record<Provider, string> = {
   anthropic: 'Anthropic',
 };
 
-export function PricingChart() {
+interface PricingChartProps {
+  activeProviders: Provider[];
+  searchQuery: string;
+  isLongContext: boolean;
+  includeDeprecated: boolean;
+}
+
+export function PricingChart({
+  activeProviders,
+  searchQuery,
+  isLongContext,
+  includeDeprecated,
+}: PricingChartProps) {
   const dataByProvider = useMemo(() => {
     const result: Record<
       Provider,
@@ -36,16 +49,26 @@ export function PricingChart() {
       google: [],
       anthropic: [],
     };
+    const q = searchQuery.toLowerCase();
     for (const m of PRICING_DATA) {
-      if (m.outputPrice == null || m.inputPrice === 0) continue;
+      const inPrice = isLongContext
+        ? (m.longContextInputPrice ?? m.inputPrice)
+        : m.inputPrice;
+      const outPrice = isLongContext
+        ? (m.longContextOutputPrice ?? m.outputPrice)
+        : m.outputPrice;
+      if (outPrice == null || inPrice === 0) continue;
+      if (!activeProviders.includes(m.provider)) continue;
+      if (q !== '' && !m.model.toLowerCase().includes(q)) continue;
+      if (!includeDeprecated && isDeprecated(m.deprecationDate)) continue;
       result[m.provider].push({
         name: m.model,
-        input: m.inputPrice,
-        output: m.outputPrice,
+        input: inPrice,
+        output: outPrice,
       });
     }
     return result;
-  }, []);
+  }, [activeProviders, searchQuery, isLongContext, includeDeprecated]);
 
   return (
     <ResponsiveContainer width="100%" height={400}>
