@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Coins } from 'lucide-react';
 import { Coins, Github } from 'lucide-react';
 import { ThemeProvider } from '@/components/layout/theme-provider';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
