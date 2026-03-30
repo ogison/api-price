@@ -1,8 +1,8 @@
 'use client';
 
 import { Search } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { PROVIDER_CONFIG } from '@/lib/constants/providers';
 import type { Provider } from '@/types/pricing';
 
@@ -21,28 +21,33 @@ export function PricingFilters({
   searchQuery,
   onSearchChange,
 }: PricingFiltersProps) {
+  const handleProviderToggle = (provider: Provider, checked: boolean) => {
+    if (checked) {
+      onProvidersChange([...activeProviders, provider]);
+    } else {
+      const next = activeProviders.filter((p) => p !== provider);
+      if (next.length > 0) onProvidersChange(next);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <ToggleGroup
-        type="multiple"
-        value={activeProviders}
-        onValueChange={(value) => {
-          if (value.length > 0) {
-            onProvidersChange(value as Provider[]);
-          }
-        }}
-        className="justify-start"
-      >
+      <div className="flex items-center gap-4">
         {providers.map((provider) => (
-          <ToggleGroupItem
+          <label
             key={provider}
-            value={provider}
-            aria-label={`Toggle ${PROVIDER_CONFIG[provider].label}`}
+            className="flex cursor-pointer items-center gap-1.5 text-sm font-medium"
           >
+            <Checkbox
+              checked={activeProviders.includes(provider)}
+              onCheckedChange={(checked) =>
+                handleProviderToggle(provider, checked === true)
+              }
+            />
             {PROVIDER_CONFIG[provider].label}
-          </ToggleGroupItem>
+          </label>
         ))}
-      </ToggleGroup>
+      </div>
       <div className="relative max-w-xs">
         <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
