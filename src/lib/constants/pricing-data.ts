@@ -679,10 +679,13 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.5,
     cachedInputPrice: 0.05,
     outputPrice: 3.0,
+    longContextInputPrice: 0.5,
+    longContextCachedInputPrice: 0.05,
+    longContextOutputPrice: 3.0,
     contextWindow: 1_000_000,
     releaseDate: '2025-12-17',
     notes:
-      'Preview。音声入力は $1/M（cached $0.1/M）。text/image/video は表記の通り',
+      'Preview。音声入力は $1/M（cached $0.1/M）。text/image/video は表記の通り。>200K で長文料金（標準と同額）',
   },
   {
     id: 'gemini-3.1-flash-lite-preview',
@@ -691,9 +694,13 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.25,
     cachedInputPrice: 0.03,
     outputPrice: 1.5,
+    longContextInputPrice: 0.25,
+    longContextCachedInputPrice: 0.03,
+    longContextOutputPrice: 1.5,
     contextWindow: 1_000_000,
     releaseDate: '2026-03-03',
-    notes: 'Preview。音声入力は $0.5/M（cached $0.05/M）',
+    notes:
+      'Preview。音声入力は $0.5/M（cached $0.05/M）。>200K で長文料金（標準と同額）',
   },
   {
     id: 'gemini-3.1-flash-image-preview',
@@ -754,11 +761,14 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.3,
     cachedInputPrice: 0.03,
     outputPrice: 2.5,
+    longContextInputPrice: 0.3,
+    longContextCachedInputPrice: 0.03,
+    longContextOutputPrice: 2.5,
     contextWindow: 1_000_000,
     releaseDate: '2025-06-17',
     deprecationDate: '2026-06-17',
     notes:
-      'text/image/video 入力。音声入力 $1/M（cached $0.1/M）。>200K でも入力・出力単価は表と同額（長文列）',
+      'text/image/video 入力。音声入力 $1/M（cached $0.1/M）。>200K で長文料金（標準と同額）',
   },
   {
     id: 'gemini-2.5-flash-lite',
@@ -767,10 +777,14 @@ export const PRICING_DATA: ModelPricing[] = [
     inputPrice: 0.1,
     cachedInputPrice: 0.01,
     outputPrice: 0.4,
+    longContextInputPrice: 0.1,
+    longContextCachedInputPrice: 0.01,
+    longContextOutputPrice: 0.4,
     contextWindow: 1_000_000,
     releaseDate: '2025-07-22',
     deprecationDate: '2026-07-22',
-    notes: 'text/image/video 入力。音声入力 $0.3/M（cached $0.03/M）',
+    notes:
+      'text/image/video 入力。音声入力 $0.3/M（cached $0.03/M）。>200K で長文料金（標準と同額）',
   },
   {
     id: 'gemini-2.5-flash-image',
