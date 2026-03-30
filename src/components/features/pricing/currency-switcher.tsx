@@ -5,7 +5,13 @@ import {
   TOKEN_UNITS,
   useCurrency,
 } from '@/context/currency-context';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export function CurrencySwitcher() {
   const { currency, setCurrency, tokenUnit, setTokenUnit } = useCurrency();
@@ -16,35 +22,39 @@ export function CurrencySwitcher() {
         <span className="text-xs font-medium text-muted-foreground">
           Currency:
         </span>
-        <ToggleGroup
-          type="single"
+        <Select
           value={currency}
-          onValueChange={(v) => {
-            if (v) setCurrency(v as typeof currency);
-          }}
+          onValueChange={(v) => setCurrency(v as typeof currency)}
         >
-          {CURRENCIES.map((c) => (
-            <ToggleGroupItem key={c} value={c} className="text-xs">
-              {c}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+          <SelectTrigger className="h-8 w-[80px] text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {CURRENCIES.map((c) => (
+              <SelectItem key={c} value={c}>
+                {c}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex items-center gap-2">
         <span className="text-xs font-medium text-muted-foreground">Unit:</span>
-        <ToggleGroup
-          type="single"
+        <Select
           value={tokenUnit}
-          onValueChange={(v) => {
-            if (v) setTokenUnit(v as typeof tokenUnit);
-          }}
+          onValueChange={(v) => setTokenUnit(v as typeof tokenUnit)}
         >
-          {TOKEN_UNITS.map((u) => (
-            <ToggleGroupItem key={u} value={u} className="text-xs">
-              /{u}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+          <SelectTrigger className="h-8 w-[100px] text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {TOKEN_UNITS.map((u) => (
+              <SelectItem key={u} value={u}>
+                /{u}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

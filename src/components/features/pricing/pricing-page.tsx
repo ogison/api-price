@@ -10,8 +10,14 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
 import { isDeprecated } from '@/lib/helpers/format';
 import type { Provider } from '@/types/pricing';
@@ -123,20 +129,18 @@ export function PricingPage() {
                 <span className="text-xs font-medium text-muted-foreground">
                   Pricing:
                 </span>
-                <ToggleGroup
-                  type="single"
+                <Select
                   value={isLongContext ? 'long' : 'standard'}
-                  onValueChange={(v) => {
-                    if (v) setIsLongContext(v === 'long');
-                  }}
+                  onValueChange={(v) => setIsLongContext(v === 'long')}
                 >
-                  <ToggleGroupItem value="standard" className="text-xs">
-                    Standard
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="long" className="text-xs">
-                    Long Context
-                  </ToggleGroupItem>
-                </ToggleGroup>
+                  <SelectTrigger className="h-8 w-[140px] text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="standard">Standard</SelectItem>
+                    <SelectItem value="long">Long Context</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             <span className="text-sm text-muted-foreground">
