@@ -190,7 +190,7 @@ export function PricingTable({
         <p className="text-xs text-muted-foreground">
           ※ 価格は {unitLabel} あたり。
           {isLongContext &&
-            'Long Context モード: 長文プロンプト（>200Kトークン）適用時の料金を表示中。'}
+            'Long Context モード: OpenAIモデルで272Kトークンを超える入力時に適用される料金を表示中。'}
         </p>
       </CardFooter>
     </Card>
