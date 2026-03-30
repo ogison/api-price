@@ -4,6 +4,13 @@ import { useMemo, useState } from 'react';
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import { Card, CardFooter } from '@/components/ui/card';
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
   Table,
   TableBody,
   TableCell,
@@ -11,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useCurrency } from '@/context/currency-context';
+import { TOKEN_UNITS, useCurrency } from '@/context/currency-context';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
 import {
   formatContextWindow,
@@ -45,7 +52,8 @@ export function PricingTable({
   isLongContext,
   includeDeprecated,
 }: PricingTableProps) {
-  const { formatConvertedPrice, unitLabel } = useCurrency();
+  const { formatConvertedPrice, unitLabel, tokenUnit, setTokenUnit } =
+    useCurrency();
 
   const [sortField, setSortField] = useState<SortField>('inputPrice');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
@@ -103,6 +111,24 @@ export function PricingTable({
 
   return (
     <Card className="overflow-hidden">
+      <div className="flex items-center gap-2 border-b px-4 py-2">
+        <span className="text-xs font-medium text-muted-foreground">Unit:</span>
+        <Select
+          value={tokenUnit}
+          onValueChange={(v) => setTokenUnit(v as typeof tokenUnit)}
+        >
+          <SelectTrigger className="h-8 w-[100px] text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {TOKEN_UNITS.map((u) => (
+              <SelectItem key={u} value={u}>
+                /{u}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
