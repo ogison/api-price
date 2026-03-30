@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Coins } from 'lucide-react';
+import { Coins, Github } from 'lucide-react';
 import { ThemeProvider } from '@/components/layout/theme-provider';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { CurrencyProvider } from '@/context/currency-context';
@@ -38,6 +38,15 @@ export default function RootLayout({
                 Data sources: OpenAI, Google Cloud, Anthropic official pricing
                 pages
               </p>
+              <a
+                href="https://github.com/ogison/api-price"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Github className="h-4 w-4" />
+                <span>GitHub</span>
+              </a>
             </footer>
           </CurrencyProvider>
         </ThemeProvider>
