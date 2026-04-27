@@ -33,6 +33,10 @@ pnpm format         # コードフォーマット
 pnpm update-pricing # 料金データ更新
 ```
 
+## Maintenance
+
+- [Pricing update workflow setup](./docs/pricing-update-workflow.md) — required configuration for the scheduled `Update Pricing Data` GitHub Actions workflow to open pull requests.
+
 ## License
 
 [MIT](./LICENSE)
