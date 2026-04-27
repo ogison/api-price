@@ -1,31 +1,31 @@
-# Pricing Update Workflow Setup
+# Pricing Update ワークフローのセットアップ
 
-`.github/workflows/update-pricing.yml` runs `pnpm tsx scripts/update-pricing/index.ts` on a schedule and opens a pull request via [`peter-evans/create-pull-request`](https://github.com/peter-evans/create-pull-request) when pricing data changes.
+`.github/workflows/update-pricing.yml` はスケジュール実行で `pnpm tsx scripts/update-pricing/index.ts` を実行し、料金データに変更があれば [`peter-evans/create-pull-request`](https://github.com/peter-evans/create-pull-request) を使って Pull Request を自動作成します。
 
-The workflow already declares the required `permissions:` block (`contents: write`, `pull-requests: write`). However, recent runs fail at the "Create Pull Request" step with:
+ワークフローには必要な `permissions:`（`contents: write`、`pull-requests: write`）が既に設定されていますが、直近の実行では `Create Pull Request` ステップで以下のエラーが発生しています:
 
 ```
 GitHub Actions is not permitted to create or approve pull requests.
 HttpError: Resource not accessible by integration
 ```
 
-This is a repository-level restriction that cannot be lifted from inside the workflow file. Pick one of the two options below to unblock automated pricing PRs.
+これはワークフローファイルの中からは解除できないリポジトリレベルの制限です。組織のポリシーに合わせて、以下の **A** または **B** のどちらかを適用してください。
 
-## Option A (recommended): allow Actions to open PRs
+## オプション A（推奨）: GitHub Actions に PR 作成を許可する
 
-1. Open **Settings → Actions → General → Workflow permissions**.
-2. Check **"Allow GitHub Actions to create and approve pull requests"**.
-3. Save.
+1. **Settings → Actions → General → Workflow permissions** を開く。
+2. **「Allow GitHub Actions to create and approve pull requests」** にチェックを入れる。
+3. 設定を保存する。
 
-After this, the next scheduled or manually dispatched run can create the PR with the default `GITHUB_TOKEN` and no further changes are required.
+設定後はデフォルトの `GITHUB_TOKEN` のまま PR が作成できるようになり、コード側の変更は不要です。次回のスケジュール実行または手動実行で復旧します。
 
-## Option B: use a Personal Access Token
+## オプション B: Personal Access Token (PAT) を使う
 
-If org policy keeps the setting above disabled, create a token and reference it from the workflow:
+組織のポリシー上、オプション A の設定を有効化できない場合は PAT を利用します。
 
-1. Create a fine-grained PAT scoped to this repository with `Contents: Read and write` and `Pull requests: Read and write`. A classic PAT with the `repo` scope also works.
-2. Add it as a repository secret named `PRICING_PR_TOKEN` (**Settings → Secrets and variables → Actions → New repository secret**).
-3. Update the `Create Pull Request` step in `.github/workflows/update-pricing.yml` to prefer the PAT when present:
+1. このリポジトリに対して `Contents: Read and write` と `Pull requests: Read and write` を付与した fine-grained PAT を発行する（`repo` スコープを持つクラシック PAT でも可）。
+2. **Settings → Secrets and variables → Actions → New repository secret** から `PRICING_PR_TOKEN` という名前のリポジトリシークレットとして登録する。
+3. `.github/workflows/update-pricing.yml` の `Create Pull Request` ステップで、PAT があればそれを優先するように `token:` を書き換える:
 
    ```yaml
    - name: Create Pull Request
@@ -40,10 +40,10 @@ If org policy keeps the setting above disabled, create a token and reference it 
        commit-message: 'chore: update pricing data from official sources'
    ```
 
-   The `||` fallback keeps the workflow working in environments where Option A is enabled instead.
+   `||` でフォールバックさせているので、後からオプション A を有効化した環境でもそのまま動作します。
 
-## Verifying the fix
+## 動作確認
 
-1. Trigger the workflow manually: **Actions → Update Pricing Data → Run workflow**.
-2. If pricing data changed, the run should finish without the "Resource not accessible by integration" error and a PR should appear on the `automated/pricing-update` branch.
-3. If no pricing data changed, the "Create Pull Request" step is skipped — that is expected and not a failure.
+1. **Actions → Update Pricing Data → Run workflow** からワークフローを手動実行する。
+2. 料金データに差分があれば、`Resource not accessible by integration` のエラーが出ずに `automated/pricing-update` ブランチへ PR が作成されることを確認する。
+3. 料金データに差分がない場合は `Create Pull Request` ステップがスキップされる。これは正常な挙動で、失敗ではない。
