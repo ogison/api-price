@@ -33,6 +33,10 @@ pnpm format         # コードフォーマット
 pnpm update-pricing # 料金データ更新
 ```
 
+## メンテナンス
+
+- [Pricing update ワークフローのセットアップ](./docs/pricing-update-workflow.md) — 定期実行ワークフロー `Update Pricing Data` から PR を作成するために必要な設定手順。
+
 ## License
 
 [MIT](./LICENSE)
