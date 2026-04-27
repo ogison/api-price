@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { fetchAnthropic } from './fetchers/anthropic.js';
 import { fetchExchangeRates } from './fetchers/exchange-rates.js';
 import { fetchGoogle } from './fetchers/google.js';
@@ -5,9 +6,37 @@ import { fetchOpenAI } from './fetchers/openai.js';
 import { validateModels } from './validate.js';
 import { generateDiff, formatDiffReport } from './diff-report.js';
 import { writePricingFile, writeExchangeRates } from './generate.js';
-import type { RawModelPricing, FetchResult } from './types.js';
+import type { DiffEntry, RawModelPricing, FetchResult } from './types.js';
 // tsx can directly import TypeScript source files
 import { PRICING_DATA } from '../../src/lib/constants/pricing-data.js';
+
+function buildPrTitle(diff: DiffEntry[]): string {
+  const added = diff.filter((d) => d.type === 'added');
+  const changed = diff.filter((d) => d.type === 'changed');
+  const removed = diff.filter((d) => d.type === 'removed');
+
+  if (added.length > 0) {
+    const names = added.map((d) => d.model).join(', ');
+    const truncated = names.length > 80 ? `${names.slice(0, 77)}...` : names;
+    return `feat: add new model${added.length > 1 ? 's' : ''}: ${truncated}`;
+  }
+  if (changed.length > 0) {
+    return `chore: update pricing (${changed.length} model${changed.length > 1 ? 's' : ''} changed)`;
+  }
+  if (removed.length > 0) {
+    return `chore: remove deprecated model${removed.length > 1 ? 's' : ''}`;
+  }
+  return 'chore: update pricing data';
+}
+
+function writeGithubOutput(values: Record<string, string>): void {
+  const file = process.env.GITHUB_OUTPUT;
+  if (!file) return;
+  const lines = Object.entries(values)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('\n');
+  fs.appendFileSync(file, `${lines}\n`);
+}
 
 function loadExistingData(): RawModelPricing[] {
   return PRICING_DATA as RawModelPricing[];
@@ -145,6 +174,7 @@ async function main() {
 
   if (diff.length === 0 && !exchangeRates) {
     console.log('\nNo changes detected. Exiting.');
+    writeGithubOutput({ has_added: 'false', pr_title: buildPrTitle(diff) });
     process.exit(0);
   }
 
@@ -155,6 +185,12 @@ async function main() {
   if (exchangeRates) {
     writeExchangeRates(exchangeRates);
   }
+
+  // Step 8: Emit metadata for the workflow (PR title, new-model flag)
+  writeGithubOutput({
+    has_added: diff.some((d) => d.type === 'added') ? 'true' : 'false',
+    pr_title: buildPrTitle(diff),
+  });
 
   console.log('\nDone!');
 }
