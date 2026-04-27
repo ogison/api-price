@@ -30,7 +30,7 @@
     "@types/react-dom": "^19",
     "cheerio": "^1.2.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.2",
+    "eslint-config-next": "16.2.4",
     "prettier": "^3.8.3",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
