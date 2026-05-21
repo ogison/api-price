@@ -654,6 +654,24 @@ export const PRICING_DATA: ModelPricing[] = [
     outputPrice: 16,
     contextWindow: 128_000,
   },
+  {
+    id: 'gpt-realtime-2',
+    provider: 'openai',
+    model: 'gpt-realtime-2',
+    inputPrice: 32,
+    cachedInputPrice: 0.4,
+    outputPrice: 64,
+    contextWindow: 128_000,
+  },
+  {
+    id: 'chat-latest',
+    provider: 'openai',
+    model: 'chat-latest',
+    inputPrice: 5,
+    cachedInputPrice: 0.5,
+    outputPrice: 30,
+    contextWindow: 128_000,
+  },
 
   // Anthropic
   {
@@ -876,6 +894,15 @@ export const PRICING_DATA: ModelPricing[] = [
     outputPrice: 5,
     contextWindow: 200_000,
     releaseDate: '2025-10-01',
+  },
+  {
+    id: 'claude-haiku-3.5-(retired,-except-on-bedrock-and-vertex-ai)',
+    provider: 'anthropic',
+    model: 'Claude Haiku 3.5 (retired, except on Bedrock and Vertex AI)',
+    inputPrice: 0.8,
+    cachedInputPrice: 0.08,
+    outputPrice: 4,
+    contextWindow: 200_000,
   },
 
   // Google (Vertex AI)
