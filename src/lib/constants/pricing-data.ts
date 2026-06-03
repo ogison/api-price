@@ -904,6 +904,15 @@ export const PRICING_DATA: ModelPricing[] = [
     outputPrice: 4,
     contextWindow: 200_000,
   },
+  {
+    id: 'claude-opus-4.8',
+    provider: 'anthropic',
+    model: 'Claude Opus 4.8',
+    inputPrice: 5,
+    cachedInputPrice: 0.5,
+    outputPrice: 25,
+    contextWindow: 200_000,
+  },
 
   // Google (Vertex AI)
   {
@@ -1170,6 +1179,14 @@ export const PRICING_DATA: ModelPricing[] = [
     model: 'Gemini 2.0 Flash Lite',
     inputPrice: 0.075,
     outputPrice: 0.3,
+    contextWindow: 1_000_000,
+  },
+  {
+    id: 'gemini-3-pro-image',
+    provider: 'google',
+    model: 'Gemini 3 Pro Image',
+    inputPrice: 2,
+    outputPrice: 12,
     contextWindow: 1_000_000,
   },
 ];
