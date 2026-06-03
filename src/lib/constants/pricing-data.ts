@@ -825,6 +825,15 @@ export const PRICING_DATA: ModelPricing[] = [
     outputPrice: 25,
     contextWindow: 200_000,
   },
+  {
+    id: 'claude-opus-4.8',
+    provider: 'anthropic',
+    model: 'Claude Opus 4.8',
+    inputPrice: 5,
+    cachedInputPrice: 0.5,
+    outputPrice: 25,
+    contextWindow: 200_000,
+  },
 
   // Google (Vertex AI)
   {
@@ -1036,5 +1045,13 @@ export const PRICING_DATA: ModelPricing[] = [
     releaseDate: '2025-04-09',
     notes:
       'テキスト入出。音声入 $3/M、映像・画像入 $3/M、音声出 $12/M（Preview 注記あり）',
+  },
+  {
+    id: 'gemini-3-pro-image',
+    provider: 'google',
+    model: 'Gemini 3 Pro Image',
+    inputPrice: 2,
+    outputPrice: 12,
+    contextWindow: 1_000_000,
   },
 ];
