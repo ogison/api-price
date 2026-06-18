@@ -12,20 +12,10 @@ import {
   YAxis,
 } from 'recharts';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
+import { PROVIDER_CONFIG } from '@/lib/constants/providers';
 import { isDeprecated } from '@/lib/helpers/format';
+import { useCurrency } from '@/context/currency-context';
 import type { Provider } from '@/types/pricing';
-
-const PROVIDER_COLORS: Record<Provider, string> = {
-  openai: '#10b981',
-  google: '#3b82f6',
-  anthropic: '#f97316',
-};
-
-const PROVIDER_LABELS: Record<Provider, string> = {
-  openai: 'OpenAI',
-  google: 'Google',
-  anthropic: 'Anthropic',
-};
 
 interface PricingChartProps {
   activeProviders: Provider[];
@@ -40,6 +30,8 @@ export function PricingChart({
   isLongContext,
   includeDeprecated,
 }: PricingChartProps) {
+  const { convertPrice, formatConvertedPrice, currencySymbol, unitLabel } =
+    useCurrency();
   const dataByProvider = useMemo(() => {
     const result: Record<
       Provider,
@@ -70,6 +62,18 @@ export function PricingChart({
     return result;
   }, [activeProviders, searchQuery, isLongContext, includeDeprecated]);
 
+  const hasData = (Object.values(dataByProvider) as { name: string }[][]).some(
+    (points) => points.length > 0
+  );
+
+  if (!hasData) {
+    return (
+      <p className="py-8 text-center text-sm text-muted-foreground">
+        条件に一致するモデルがありません。フィルターや検索条件を見直してください。
+      </p>
+    );
+  }
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <ScatterChart margin={{ top: 10, right: 30, bottom: 10, left: 10 }}>
@@ -78,19 +82,17 @@ export function PricingChart({
           type="number"
           dataKey="input"
           name="Input"
-          unit="$"
           scale="log"
           domain={['auto', 'auto']}
-          tickFormatter={(v: number) => `$${v}`}
+          tickFormatter={(v: number) => `${currencySymbol}${convertPrice(v)}`}
         />
         <YAxis
           type="number"
           dataKey="output"
           name="Output"
-          unit="$"
           scale="log"
           domain={['auto', 'auto']}
-          tickFormatter={(v: number) => `$${v}`}
+          tickFormatter={(v: number) => `${currencySymbol}${convertPrice(v)}`}
         />
         <Tooltip
           content={({ payload }) => {
@@ -103,8 +105,12 @@ export function PricingChart({
             return (
               <div className="rounded-md border bg-popover px-3 py-2 text-sm shadow-md">
                 <p className="font-semibold">{d.name}</p>
-                <p>Input: ${d.input}/M</p>
-                <p>Output: ${d.output}/M</p>
+                <p>
+                  Input: {formatConvertedPrice(d.input)} / {unitLabel}
+                </p>
+                <p>
+                  Output: {formatConvertedPrice(d.output)} / {unitLabel}
+                </p>
               </div>
             );
           }}
@@ -113,9 +119,9 @@ export function PricingChart({
         {(Object.keys(dataByProvider) as Provider[]).map((provider) => (
           <Scatter
             key={provider}
-            name={PROVIDER_LABELS[provider]}
+            name={PROVIDER_CONFIG[provider].label}
             data={dataByProvider[provider]}
-            fill={PROVIDER_COLORS[provider]}
+            fill={PROVIDER_CONFIG[provider].color}
           />
         ))}
       </ScatterChart>

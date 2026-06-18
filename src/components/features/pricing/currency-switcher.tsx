@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/select';
 
 export function CurrencySwitcher() {
-  const { currency, setCurrency } = useCurrency();
+  const { currency, setCurrency, exchangeRate, ratesUpdatedAt } = useCurrency();
 
   return (
     <div className="flex items-center gap-2">
@@ -32,6 +32,11 @@ export function CurrencySwitcher() {
           ))}
         </SelectContent>
       </Select>
+      {currency !== 'USD' && (
+        <span className="text-xs text-muted-foreground">
+          1 USD = {exchangeRate} {currency} · {ratesUpdatedAt} 時点
+        </span>
+      )}
     </div>
   );
 }
