@@ -136,13 +136,23 @@ export function PricingTable({
               {SORTABLE_FIELDS.map(({ key, label }) => (
                 <TableHead
                   key={key}
-                  className="cursor-pointer select-none hover:bg-muted/80"
-                  onClick={() => handleSort(key)}
+                  className="select-none"
+                  aria-sort={
+                    sortField === key
+                      ? sortDirection === 'asc'
+                        ? 'ascending'
+                        : 'descending'
+                      : 'none'
+                  }
                 >
-                  <div className="flex items-center whitespace-nowrap">
+                  <button
+                    type="button"
+                    onClick={() => handleSort(key)}
+                    className="-mx-1 flex items-center whitespace-nowrap rounded px-1 hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
                     {label}
                     <SortIcon field={key} />
-                  </div>
+                  </button>
                 </TableHead>
               ))}
               <TableHead>Notes</TableHead>

@@ -1,5 +1,5 @@
 {
-  "name": "next-js-template",
+  "name": "api-price",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "update-pricing": "tsx scripts/update-pricing/index.ts"
   },
   "dependencies": {
@@ -35,6 +38,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5",
+    "vitest": "^4.1.9",
     "zod": "^4.4.3"
   }
 }

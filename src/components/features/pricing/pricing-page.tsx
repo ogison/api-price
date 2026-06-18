@@ -19,7 +19,9 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
+import { PROVIDERS } from '@/lib/constants/providers';
 import { isDeprecated } from '@/lib/helpers/format';
+import { usePersistedState } from '@/hooks/use-persisted-state';
 import type { Provider } from '@/types/pricing';
 import { CostSimulator } from './cost-simulator';
 import { CurrencySwitcher } from './currency-switcher';
@@ -28,14 +30,12 @@ import { PricingChart } from './pricing-chart';
 import { PricingFilters } from './pricing-filters';
 import { PricingTable } from './pricing-table';
 
-const ALL_PROVIDERS: Provider[] = ['openai', 'google', 'anthropic'];
-
 function parseProviders(param: string | null): Provider[] {
-  if (!param) return ALL_PROVIDERS;
+  if (!param) return PROVIDERS;
   const values = param
     .split(',')
-    .filter((v): v is Provider => ALL_PROVIDERS.includes(v as Provider));
-  return values.length > 0 ? values : ALL_PROVIDERS;
+    .filter((v): v is Provider => PROVIDERS.includes(v as Provider));
+  return values.length > 0 ? values : PROVIDERS;
 }
 
 export function PricingPage() {
@@ -46,8 +46,18 @@ export function PricingPage() {
     parseProviders(searchParams.get('providers'))
   );
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') ?? '');
-  const [isLongContext, setIsLongContext] = useState(false);
-  const [includeDeprecated, setIncludeDeprecated] = useState(false);
+  const reviveBoolean = (v: unknown) =>
+    typeof v === 'boolean' ? v : undefined;
+  const [isLongContext, setIsLongContext] = usePersistedState<boolean>(
+    'api-price:longContext',
+    false,
+    reviveBoolean
+  );
+  const [includeDeprecated, setIncludeDeprecated] = usePersistedState<boolean>(
+    'api-price:deprecated',
+    false,
+    reviveBoolean
+  );
 
   const updateURL = useCallback(
     (params: Record<string, string | null>) => {
@@ -59,7 +69,7 @@ export function PricingPage() {
           newParams.set(key, value);
         }
       }
-      if (newParams.get('providers') === ALL_PROVIDERS.join(','))
+      if (newParams.get('providers') === PROVIDERS.join(','))
         newParams.delete('providers');
 
       const qs = newParams.toString();

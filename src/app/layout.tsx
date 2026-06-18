@@ -4,12 +4,29 @@ import { Coins, Github } from 'lucide-react';
 import { ThemeProvider } from '@/components/layout/theme-provider';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { CurrencyProvider } from '@/context/currency-context';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants/site';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'API Price Comparison',
-  description:
-    'Compare LLM API pricing across OpenAI, Google (Vertex AI), and Anthropic',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    url: '/',
+    type: 'website',
+    locale: 'ja_JP',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -18,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col antialiased">
         <ThemeProvider>
           <CurrencyProvider>

@@ -11,16 +11,11 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
+import { calculateModelCost } from '@/lib/helpers/cost';
 import { formatReleaseDate, isDeprecated } from '@/lib/helpers/format';
+import { useCurrency } from '@/context/currency-context';
 import type { Provider } from '@/types/pricing';
 import { ProviderBadge } from './provider-badge';
-
-function formatCost(cost: number): string {
-  if (cost < 0.001) return `$${cost.toFixed(6)}`;
-  if (cost < 0.01) return `$${cost.toFixed(4)}`;
-  if (cost < 1) return `$${cost.toFixed(3)}`;
-  return `$${cost.toFixed(2)}`;
-}
 
 interface CostSimulatorProps {
   activeProviders: Provider[];
@@ -29,29 +24,34 @@ interface CostSimulatorProps {
   includeDeprecated: boolean;
 }
 
+/** Coerce parsed input to a finite number, falling back when NaN/Infinity. */
+function toFinite(value: number, fallback = 0): number {
+  return Number.isFinite(value) ? value : fallback;
+}
+
 export function CostSimulator({
   activeProviders,
   searchQuery,
   isLongContext,
   includeDeprecated,
 }: CostSimulatorProps) {
+  const { formatAmount } = useCurrency();
   const [inputTokens, setInputTokens] = useState('');
   const [outputTokens, setOutputTokens] = useState('');
   const [requestCount, setRequestCount] = useState('1');
   const [cacheRate, setCacheRate] = useState('0');
 
   const results = useMemo(() => {
-    const inTok = parseFloat(inputTokens) || 0;
-    const outTok = parseFloat(outputTokens) || 0;
-    const reqCount = parseInt(requestCount) || 1;
-    const cache = Math.min(100, Math.max(0, parseFloat(cacheRate) || 0)) / 100;
+    const inTok = Math.max(0, toFinite(parseFloat(inputTokens)));
+    const outTok = Math.max(0, toFinite(parseFloat(outputTokens)));
+    const reqCount = Math.max(
+      1,
+      Math.floor(toFinite(parseInt(requestCount, 10), 1))
+    );
+    const cache =
+      Math.min(100, Math.max(0, toFinite(parseFloat(cacheRate)))) / 100;
 
     if (inTok === 0 && outTok === 0) return [];
-
-    const totalInputTokens = inTok * reqCount;
-    const totalOutputTokens = outTok * reqCount;
-    const cachedTokens = totalInputTokens * cache;
-    const uncachedTokens = totalInputTokens - cachedTokens;
 
     const q = searchQuery.toLowerCase();
     return PRICING_DATA.filter(
@@ -62,29 +62,20 @@ export function CostSimulator({
         (includeDeprecated || !isDeprecated(m.deprecationDate))
     )
       .map((m) => {
-        const inPrice = isLongContext
-          ? (m.longContextInputPrice ?? m.inputPrice)
-          : m.inputPrice;
-        const cachePrice = isLongContext
-          ? (m.longContextCachedInputPrice ?? m.cachedInputPrice)
-          : m.cachedInputPrice;
-        const outPrice = isLongContext
-          ? (m.longContextOutputPrice ?? m.outputPrice)
-          : m.outputPrice;
-        const inputCost = (uncachedTokens / 1_000_000) * inPrice;
-        const cachedCost =
-          cachePrice != null
-            ? (cachedTokens / 1_000_000) * cachePrice
-            : (cachedTokens / 1_000_000) * inPrice;
-        const outputCost = (totalOutputTokens / 1_000_000) * (outPrice ?? 0);
-        const totalCost = inputCost + cachedCost + outputCost;
+        const { inputCost, outputCost, totalCost } = calculateModelCost(m, {
+          inputTokens: inTok,
+          outputTokens: outTok,
+          requestCount: reqCount,
+          cacheRate: cache,
+          isLongContext,
+        });
 
         return {
           id: m.id,
           provider: m.provider,
           model: m.model,
           totalCost,
-          inputCost: inputCost + cachedCost,
+          inputCost,
           outputCost,
           releaseDate: m.releaseDate,
           deprecationDate: m.deprecationDate,
@@ -106,10 +97,14 @@ export function CostSimulator({
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label
+            htmlFor="sim-input-tokens"
+            className="mb-1 block text-xs font-medium text-muted-foreground"
+          >
             Input tokens / request
           </label>
           <Input
+            id="sim-input-tokens"
             type="number"
             placeholder="e.g. 1000"
             value={inputTokens}
@@ -118,10 +113,14 @@ export function CostSimulator({
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label
+            htmlFor="sim-output-tokens"
+            className="mb-1 block text-xs font-medium text-muted-foreground"
+          >
             Output tokens / request
           </label>
           <Input
+            id="sim-output-tokens"
             type="number"
             placeholder="e.g. 500"
             value={outputTokens}
@@ -130,10 +129,14 @@ export function CostSimulator({
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label
+            htmlFor="sim-request-count"
+            className="mb-1 block text-xs font-medium text-muted-foreground"
+          >
             Request count
           </label>
           <Input
+            id="sim-request-count"
             type="number"
             placeholder="1"
             value={requestCount}
@@ -142,10 +145,14 @@ export function CostSimulator({
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-muted-foreground">
+          <label
+            htmlFor="sim-cache-rate"
+            className="mb-1 block text-xs font-medium text-muted-foreground"
+          >
             Cache hit rate (%)
           </label>
           <Input
+            id="sim-cache-rate"
             type="number"
             placeholder="0"
             value={cacheRate}
@@ -185,13 +192,13 @@ export function CostSimulator({
                   </TableCell>
                   <TableCell className="font-medium">{r.model}</TableCell>
                   <TableCell className="text-right font-mono">
-                    {formatCost(r.inputCost)}
+                    {formatAmount(r.inputCost)}
                   </TableCell>
                   <TableCell className="text-right font-mono">
-                    {formatCost(r.outputCost)}
+                    {formatAmount(r.outputCost)}
                   </TableCell>
                   <TableCell className="text-right font-mono font-semibold">
-                    {formatCost(r.totalCost)}
+                    {formatAmount(r.totalCost)}
                   </TableCell>
                   <TableCell className="whitespace-nowrap">
                     {formatReleaseDate(r.releaseDate)}

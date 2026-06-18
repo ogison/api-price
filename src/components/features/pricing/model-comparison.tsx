@@ -6,10 +6,10 @@ import { Input } from '@/components/ui/input';
 import { PRICING_DATA } from '@/lib/constants/pricing-data';
 import {
   formatContextWindow,
-  formatPrice,
   formatReleaseDate,
   isDeprecated,
 } from '@/lib/helpers/format';
+import { useCurrency } from '@/context/currency-context';
 import type { ModelPricing, Provider } from '@/types/pricing';
 import { ProviderBadge } from './provider-badge';
 
@@ -26,6 +26,7 @@ export function ModelComparison({
   searchQuery,
   includeDeprecated,
 }: ModelComparisonProps) {
+  const { formatConvertedPrice } = useCurrency();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [search, setSearch] = useState('');
 
@@ -72,15 +73,18 @@ export function ModelComparison({
     label: string;
     render: (m: ModelPricing) => string;
   }[] = [
-    { label: 'Input Price', render: (m) => formatPrice(m.inputPrice) },
+    { label: 'Input Price', render: (m) => formatConvertedPrice(m.inputPrice) },
     {
       label: 'Cached Input',
       render: (m) =>
-        m.cachedInputPrice != null ? formatPrice(m.cachedInputPrice) : '—',
+        m.cachedInputPrice != null
+          ? formatConvertedPrice(m.cachedInputPrice)
+          : '—',
     },
     {
       label: 'Output Price',
-      render: (m) => (m.outputPrice != null ? formatPrice(m.outputPrice) : '—'),
+      render: (m) =>
+        m.outputPrice != null ? formatConvertedPrice(m.outputPrice) : '—',
     },
     {
       label: 'Context Window',
@@ -94,14 +98,14 @@ export function ModelComparison({
       label: 'Long Context Input',
       render: (m) =>
         m.longContextInputPrice != null
-          ? formatPrice(m.longContextInputPrice)
+          ? formatConvertedPrice(m.longContextInputPrice)
           : '—',
     },
     {
       label: 'Long Context Output',
       render: (m) =>
         m.longContextOutputPrice != null
-          ? formatPrice(m.longContextOutputPrice)
+          ? formatConvertedPrice(m.longContextOutputPrice)
           : '—',
     },
   ];
