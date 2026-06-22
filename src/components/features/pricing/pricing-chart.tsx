@@ -76,7 +76,7 @@ export function PricingChart({
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <ScatterChart margin={{ top: 10, right: 30, bottom: 10, left: 10 }}>
+      <ScatterChart margin={{ top: 10, right: 30, bottom: 28, left: 18 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           type="number"
@@ -85,6 +85,12 @@ export function PricingChart({
           scale="log"
           domain={['auto', 'auto']}
           tickFormatter={(v: number) => `${currencySymbol}${convertPrice(v)}`}
+          label={{
+            value: `Input 価格 (${unitLabel})`,
+            position: 'insideBottom',
+            offset: -18,
+            style: { fontSize: 12, fill: 'hsl(var(--muted-foreground))' },
+          }}
         />
         <YAxis
           type="number"
@@ -93,6 +99,16 @@ export function PricingChart({
           scale="log"
           domain={['auto', 'auto']}
           tickFormatter={(v: number) => `${currencySymbol}${convertPrice(v)}`}
+          label={{
+            value: `Output 価格 (${unitLabel})`,
+            angle: -90,
+            position: 'insideLeft',
+            style: {
+              fontSize: 12,
+              fill: 'hsl(var(--muted-foreground))',
+              textAnchor: 'middle',
+            },
+          }}
         />
         <Tooltip
           content={({ payload }) => {
@@ -115,7 +131,11 @@ export function PricingChart({
             );
           }}
         />
-        <Legend />
+        <Legend
+          verticalAlign="top"
+          align="center"
+          wrapperStyle={{ paddingBottom: 12 }}
+        />
         {(Object.keys(dataByProvider) as Provider[]).map((provider) => (
           <Scatter
             key={provider}

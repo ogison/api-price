@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
-import { Card, CardFooter } from '@/components/ui/card';
 import {
   Select,
   SelectContent,
@@ -110,8 +109,8 @@ export function PricingTable({
   };
 
   return (
-    <Card className="overflow-hidden">
-      <div className="flex items-center gap-2 border-b px-4 py-2">
+    <div>
+      <div className="mb-3 flex items-center gap-2">
         <span className="text-xs font-medium text-muted-foreground">Unit:</span>
         <Select
           value={tokenUnit}
@@ -129,7 +128,7 @@ export function PricingTable({
           </SelectContent>
         </Select>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-md border">
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
@@ -222,13 +221,11 @@ export function PricingTable({
           </TableBody>
         </Table>
       </div>
-      <CardFooter className="border-t px-4 py-3">
-        <p className="text-xs text-muted-foreground">
-          ※ 価格は {unitLabel} あたり。
-          {isLongContext &&
-            'Long Context モード: OpenAIモデルで272Kトークンを超える入力時に適用される料金を表示中。'}
-        </p>
-      </CardFooter>
-    </Card>
+      <p className="mt-3 text-xs text-muted-foreground">
+        ※ 価格は {unitLabel} あたり。
+        {isLongContext &&
+          'Long Context モード: OpenAIモデルで272Kトークンを超える入力時に適用される料金を表示中。'}
+      </p>
+    </div>
   );
 }
