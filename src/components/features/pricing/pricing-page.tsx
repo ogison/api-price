@@ -99,7 +99,7 @@ export function PricingPage() {
   }, [activeProviders, searchQuery, includeDeprecated]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto w-full max-w-6xl px-4 py-8">
       {/* Hero Section */}
       <div className="mb-8 rounded-xl bg-gradient-to-br from-primary/5 via-background to-accent/10 px-6 py-10">
         <h1 className="text-4xl font-bold tracking-tight">
@@ -184,7 +184,7 @@ export function PricingPage() {
             </TabsList>
           </CardHeader>
           <CardContent className="pt-6">
-            <TabsContent value="simulator" className="mt-0">
+            <TabsContent value="simulator" className="mt-0 min-h-[420px]">
               <CostSimulator
                 activeProviders={activeProviders}
                 searchQuery={searchQuery}
@@ -192,14 +192,14 @@ export function PricingPage() {
                 includeDeprecated={includeDeprecated}
               />
             </TabsContent>
-            <TabsContent value="comparison" className="mt-0">
+            <TabsContent value="comparison" className="mt-0 min-h-[420px]">
               <ModelComparison
                 activeProviders={activeProviders}
                 searchQuery={searchQuery}
                 includeDeprecated={includeDeprecated}
               />
             </TabsContent>
-            <TabsContent value="chart" className="mt-0">
+            <TabsContent value="chart" className="mt-0 min-h-[420px]">
               <Suspense>
                 <PricingChart
                   activeProviders={activeProviders}
@@ -209,7 +209,7 @@ export function PricingPage() {
                 />
               </Suspense>
             </TabsContent>
-            <TabsContent value="table" className="mt-0">
+            <TabsContent value="table" className="mt-0 min-h-[420px]">
               <Suspense>
                 <PricingTable
                   activeProviders={activeProviders}

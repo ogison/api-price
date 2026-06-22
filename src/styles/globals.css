@@ -125,9 +125,29 @@
 
   html {
     scroll-behavior: smooth;
+    /* Reserve space for the scrollbar so page width stays constant whether
+       or not content overflows (prevents horizontal shift when switching
+       tabs between short and tall content). */
+    scrollbar-gutter: stable;
   }
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Respect users who prefer reduced motion: disable smooth scroll and
+     near-instantly resolve transitions/animations. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
