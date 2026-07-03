@@ -36,8 +36,8 @@ export function CostSimulator({
   includeDeprecated,
 }: CostSimulatorProps) {
   const { formatAmount } = useCurrency();
-  const [inputTokens, setInputTokens] = useState('');
-  const [outputTokens, setOutputTokens] = useState('');
+  const [inputTokens, setInputTokens] = useState('1000');
+  const [outputTokens, setOutputTokens] = useState('1000');
   const [requestCount, setRequestCount] = useState('1');
   const [cacheRate, setCacheRate] = useState('0');
 
