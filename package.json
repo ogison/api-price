@@ -34,7 +34,7 @@
     "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
-    "prettier": "^3.9.1",
+    "prettier": "^3.9.4",
     "tailwindcss": "^4",
     "tsx": "^4.23.0",
     "typescript": "^5",
