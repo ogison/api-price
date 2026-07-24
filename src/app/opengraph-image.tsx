@@ -8,7 +8,7 @@ export const contentType = 'image/png';
 // Latin-only copy so the default Satori font renders without fetching a
 // Japanese webfont at build time (which is unavailable offline).
 const TAGLINE = 'Compare LLM API pricing';
-const SUBLINE = 'OpenAI · Google (Vertex AI) · Anthropic';
+const SUBLINE = 'OpenAI · Google (Vertex AI) · Anthropic · Sakura AI';
 
 export default function OpengraphImage() {
   return new ImageResponse(

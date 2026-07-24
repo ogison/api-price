@@ -21,6 +21,7 @@ const providerStyle: Record<string, string> = {
   anthropic:
     'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
   google: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+  sakura: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
   'exchange-rate':
     'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200',
 };
@@ -30,9 +31,9 @@ export default function DataSourcesPage() {
     <main className="mx-auto w-full max-w-4xl px-4 py-10">
       <h1 className="mb-2 text-2xl font-bold tracking-tight">Data Sources</h1>
       <p className="mb-8 text-muted-foreground">
-        本サイトの価格データは以下の公式ページ・API
-        から自動取得しています。更新は GitHub Actions
-        により定期実行され、変更があれば自動で PR が作成されます。
+        本サイトの価格データは以下の公式ページ・API から取得しています。多くは
+        GitHub Actions による自動取得で、変更があれば自動で PR
+        が作成されます（一部は公式ページからの手動転記です。詳細は各項目の「取得方法」をご確認ください）。
       </p>
 
       <div className="grid gap-4">

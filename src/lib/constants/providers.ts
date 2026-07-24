@@ -1,7 +1,12 @@
 import type { Provider } from '@/types/pricing';
 
 /** Canonical, ordered list of every supported provider. Single source of truth. */
-export const PROVIDERS: Provider[] = ['openai', 'google', 'anthropic'];
+export const PROVIDERS: Provider[] = [
+  'openai',
+  'google',
+  'anthropic',
+  'sakura',
+];
 
 export const PROVIDER_CONFIG: Record<
   Provider,
@@ -23,5 +28,10 @@ export const PROVIDER_CONFIG: Record<
     className:
       'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
     color: '#f97316',
+  },
+  sakura: {
+    label: 'Sakura AI',
+    className: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
+    color: '#ec4899',
   },
 };

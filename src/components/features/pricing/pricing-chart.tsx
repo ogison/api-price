@@ -40,6 +40,7 @@ export function PricingChart({
       openai: [],
       google: [],
       anthropic: [],
+      sakura: [],
     };
     const q = searchQuery.toLowerCase();
     for (const m of PRICING_DATA) {

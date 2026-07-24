@@ -3,7 +3,7 @@
 import { Search } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
-import { PROVIDER_CONFIG } from '@/lib/constants/providers';
+import { PROVIDER_CONFIG, PROVIDERS } from '@/lib/constants/providers';
 import type { Provider } from '@/types/pricing';
 
 interface PricingFiltersProps {
@@ -12,8 +12,6 @@ interface PricingFiltersProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
 }
-
-const providers: Provider[] = ['openai', 'google', 'anthropic'];
 
 export function PricingFilters({
   activeProviders,
@@ -33,7 +31,7 @@ export function PricingFilters({
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-4">
-        {providers.map((provider) => (
+        {PROVIDERS.map((provider) => (
           <label
             key={provider}
             className="flex cursor-pointer items-center gap-1.5 text-sm font-medium"

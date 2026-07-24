@@ -106,7 +106,7 @@ export function PricingPage() {
           API Price Comparison
         </h1>
         <p className="mt-2 text-muted-foreground">
-          OpenAI, Google (Vertex AI), Anthropic の LLM API
+          OpenAI, Google (Vertex AI), Anthropic, Sakura AI の LLM API
           料金を一覧で比較できます。
         </p>
         <Badge variant="secondary" className="mt-3">

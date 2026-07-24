@@ -70,7 +70,8 @@ export default function RootLayout({
                 >
                   Data Sources
                 </Link>
-                : OpenAI, Google Cloud, Anthropic official pricing pages
+                : OpenAI, Google Cloud, Anthropic, Sakura AI official pricing
+                pages
               </p>
               <a
                 href="https://github.com/ogison/api-price"
