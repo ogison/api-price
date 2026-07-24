@@ -1,4 +1,4 @@
-export type Provider = 'openai' | 'google' | 'anthropic';
+export type Provider = 'openai' | 'google' | 'anthropic' | 'sakura';
 
 export interface ModelPricing {
   id: string;

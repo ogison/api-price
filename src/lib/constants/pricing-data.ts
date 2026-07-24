@@ -1175,4 +1175,103 @@ export const PRICING_DATA: ModelPricing[] = [
     notes:
       'Deep Research 用エージェント。コンテキストウィンドウは公式ページに記載なし（参考値）',
   },
+
+  // Sakura AI Engine (さくらのAI Engine) — Chat completions
+  {
+    id: 'gpt-oss-120b',
+    provider: 'sakura',
+    model: 'gpt-oss-120b',
+    inputPrice: 0.092296,
+    outputPrice: 0.461482,
+    contextWindow: 131_072,
+    notes:
+      '通常モデル・従量課金プラン。円建て価格（Input 0.15円/Output 0.75円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。基盤モデル無償プラン・従量課金プランともに月3,000リクエストまで無償',
+  },
+  {
+    id: 'llm-jp-3-1-8x13b-instruct4',
+    provider: 'sakura',
+    model: 'llm-jp-3.1-8x13b-instruct4',
+    inputPrice: 0.092296,
+    outputPrice: 0.461482,
+    contextWindow: 4_096,
+    notes:
+      '通常モデル・従量課金プラン。円建て価格（Input 0.15円/Output 0.75円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。基盤モデル無償プラン・従量課金プランともに月3,000リクエストまで無償',
+  },
+  {
+    id: 'qwen3-0-6b-cpu',
+    provider: 'sakura',
+    model: 'Qwen3-0.6B-cpu',
+    inputPrice: 0.006153,
+    outputPrice: 0.018459,
+    contextWindow: 32_768,
+    releaseDate: '2025-10-09',
+    notes:
+      'パブリックプレビュー（軽量モデル、2025-10-09〜）。円建て価格（Input 0.01円/Output 0.03円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'phi-4-mini-instruct-cpu',
+    provider: 'sakura',
+    model: 'Phi-4-mini-instruct-cpu',
+    inputPrice: 0.006153,
+    outputPrice: 0.018459,
+    contextWindow: 131_072,
+    releaseDate: '2025-10-09',
+    notes:
+      'パブリックプレビュー（軽量モデル、2025-10-09〜）。円建て価格（Input 0.01円/Output 0.03円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'qwen3-vl-30b-a3b-instruct',
+    provider: 'sakura',
+    model: 'Qwen3-VL-30B-A3B-Instruct',
+    inputPrice: 0.061531,
+    outputPrice: 0.184593,
+    contextWindow: 262_144,
+    releaseDate: '2025-10-21',
+    notes:
+      'パブリックプレビュー（マルチモーダルモデル、2025-10-21〜）。円建て価格（Input 0.1円/Output 0.3円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'phi-4-multimodal-instruct',
+    provider: 'sakura',
+    model: 'Phi-4-multimodal-instruct',
+    inputPrice: 0.061531,
+    outputPrice: 0.184593,
+    contextWindow: 131_072,
+    releaseDate: '2025-10-21',
+    notes:
+      'パブリックプレビュー（マルチモーダルモデル、2025-10-21〜）。円建て価格（Input 0.1円/Output 0.3円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'kimi-k2-6',
+    provider: 'sakura',
+    model: 'Kimi-K2.6',
+    inputPrice: 0.369185,
+    outputPrice: 1.845927,
+    contextWindow: 262_144,
+    releaseDate: '2026-05-12',
+    notes:
+      'パブリックプレビュー（マルチモーダルモデル、2026-05-12〜、Kimi-K2.5 の後継）。円建て価格（Input 0.6円/Output 3円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。Anthropic 互換 Messages API では現時点で本モデルのみ利用可能。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'qwen3-6-35b-a3b',
+    provider: 'sakura',
+    model: 'Qwen3.6-35B-A3B',
+    inputPrice: 0.184593,
+    outputPrice: 0.922963,
+    contextWindow: 262_144,
+    releaseDate: '2026-06-04',
+    notes:
+      'パブリックプレビュー（マルチモーダルモデル、2026-06-04〜）。円建て価格（Input 0.3円/Output 1.5円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
+  {
+    id: 'gemma-4-31b-it',
+    provider: 'sakura',
+    model: 'gemma-4-31B-it',
+    inputPrice: 0.147674,
+    outputPrice: 0.590697,
+    contextWindow: 262_144,
+    releaseDate: '2026-06-30',
+    notes:
+      'パブリックプレビュー（2026-06-30〜）。円建て価格（Input 0.24円/Output 0.96円 ／ 10,000トークン、税込）を為替レート 1USD=162.52円（2026-07-09時点）でUSD換算。予告なく提供終了・料金変更の可能性あり',
+  },
 ];

@@ -4,7 +4,7 @@ import type { RawModelPricing, ValidationResult } from './types.js';
 
 export const ModelPricingSchema = z.object({
   id: z.string().min(1),
-  provider: z.enum(['openai', 'google', 'anthropic']),
+  provider: z.enum(['openai', 'google', 'anthropic', 'sakura']),
   model: z.string().min(1),
   inputPrice: z.number().positive(),
   cachedInputPrice: z.number().nonnegative().optional(),

@@ -36,6 +36,15 @@ export const DATA_SOURCES: DataSource[] = [
     schedule: '毎週月曜・木曜 10:00 JST',
   },
   {
+    provider: 'sakura',
+    label: 'Sakura AI (AI Engine)',
+    url: 'https://ai.sakura.ad.jp/sakura-ai/ai-engine/',
+    description:
+      'さくらのAI Engine 公式ページの「提供モデルと料金」から Chat completions 対応モデル（通常モデル・パブリックプレビューモデル）を手動転記',
+    method: '手動転記（JPY建て価格を為替レートで USD に換算）',
+    schedule: '手動更新（自動スクレイピング対象外）',
+  },
+  {
     provider: 'exchange-rate',
     label: 'Exchange Rate API',
     url: 'https://api.exchangerate-api.com/v4/latest/USD',

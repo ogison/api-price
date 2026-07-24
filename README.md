@@ -1,6 +1,6 @@
 # API Price Comparison
 
-LLM API の料金を比較するための Web アプリケーションです。OpenAI、Google (Vertex AI)、Anthropic の各モデルの料金を一覧・比較できます。
+LLM API の料金を比較するための Web アプリケーションです。OpenAI、Google (Vertex AI)、Anthropic、さくらのAI Engine の各モデルの料金を一覧・比較できます。
 
 ## Tech Stack
 
