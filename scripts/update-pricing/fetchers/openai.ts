@@ -4,8 +4,12 @@ import { fetchWithRetry, parsePrice, slugify } from './utils.js';
 
 const PRICING_URL = 'https://developers.openai.com/docs/pricing';
 
-// Known context windows (not always on the pricing page)
+// Known context windows (not always on the pricing page).
+// Keys are slugify()'d model names, e.g. "GPT-5.6 Sol" -> "gpt-5-6-sol".
 const KNOWN_CONTEXT: Record<string, number> = {
+  'gpt-5-6-sol': 1_050_000,
+  'gpt-5-6-terra': 1_050_000,
+  'gpt-5-6-luna': 1_050_000,
   'gpt-5.4': 1_000_000,
   'gpt-5.4-mini': 1_000_000,
   'gpt-5.4-nano': 1_000_000,

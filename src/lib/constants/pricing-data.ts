@@ -3,6 +3,51 @@ import type { ModelPricing } from '@/types/pricing';
 export const PRICING_DATA: ModelPricing[] = [
   // OpenAI
   {
+    id: 'gpt-5.6-sol',
+    provider: 'openai',
+    model: 'GPT-5.6 Sol',
+    inputPrice: 5,
+    cachedInputPrice: 0.5,
+    outputPrice: 30,
+    longContextInputPrice: 10,
+    longContextCachedInputPrice: 1,
+    longContextOutputPrice: 45,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-07-09',
+    notes:
+      '入力 272K トークン超は長文コンテキスト料金（入力 2 倍・出力 1.5 倍）',
+  },
+  {
+    id: 'gpt-5.6-terra',
+    provider: 'openai',
+    model: 'GPT-5.6 Terra',
+    inputPrice: 2,
+    cachedInputPrice: 0.2,
+    outputPrice: 12,
+    longContextInputPrice: 4,
+    longContextCachedInputPrice: 0.4,
+    longContextOutputPrice: 18,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-07-09',
+    notes:
+      '2026-07-30 値下げ後の価格（旧 $2.5 / $15）。入力 272K トークン超は長文コンテキスト料金',
+  },
+  {
+    id: 'gpt-5.6-luna',
+    provider: 'openai',
+    model: 'GPT-5.6 Luna',
+    inputPrice: 0.2,
+    cachedInputPrice: 0.02,
+    outputPrice: 1.2,
+    longContextInputPrice: 0.4,
+    longContextCachedInputPrice: 0.04,
+    longContextOutputPrice: 1.8,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-07-09',
+    notes:
+      '2026-07-30 値下げ後の価格（旧 $1 / $6）。入力 272K トークン超は長文コンテキスト料金',
+  },
+  {
     id: 'gpt-5.4',
     provider: 'openai',
     model: 'GPT-5.4',
