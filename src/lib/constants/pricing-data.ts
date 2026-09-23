@@ -3,6 +3,49 @@ import type { ModelPricing } from '@/types/pricing';
 export const PRICING_DATA: ModelPricing[] = [
   // OpenAI
   {
+    id: 'gpt-6-astra',
+    provider: 'openai',
+    model: 'GPT-6 Astra',
+    inputPrice: 10,
+    cachedInputPrice: 1,
+    outputPrice: 50,
+    longContextInputPrice: 20,
+    longContextCachedInputPrice: 2,
+    longContextOutputPrice: 75,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-03',
+    notes:
+      '入力 272K トークン超は長文コンテキスト料金（入力 2 倍・出力 1.5 倍）。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
+    id: 'gpt-6-sol',
+    provider: 'openai',
+    model: 'GPT-6 Sol',
+    inputPrice: 2,
+    cachedInputPrice: 0.2,
+    outputPrice: 10,
+    longContextInputPrice: 4,
+    longContextCachedInputPrice: 0.4,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-22',
+    notes:
+      '入力 272K トークン超は入力・キャッシュが 2 倍。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
+    id: 'gpt-6-luna',
+    provider: 'openai',
+    model: 'GPT-6 Luna',
+    inputPrice: 0.1,
+    cachedInputPrice: 0.01,
+    outputPrice: 0.5,
+    longContextInputPrice: 0.2,
+    longContextCachedInputPrice: 0.02,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-22',
+    notes:
+      '入力 272K トークン超は入力・キャッシュが 2 倍。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
     id: 'gpt-5.6-sol',
     provider: 'openai',
     model: 'GPT-5.6 Sol',
