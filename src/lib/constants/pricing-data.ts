@@ -3,6 +3,49 @@ import type { ModelPricing } from '@/types/pricing';
 export const PRICING_DATA: ModelPricing[] = [
   // OpenAI
   {
+    id: 'gpt-6-astra',
+    provider: 'openai',
+    model: 'GPT-6 Astra',
+    inputPrice: 10,
+    cachedInputPrice: 1,
+    outputPrice: 50,
+    longContextInputPrice: 20,
+    longContextCachedInputPrice: 2,
+    longContextOutputPrice: 75,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-03',
+    notes:
+      '入力 272K トークン超は長文コンテキスト料金（入力 2 倍・出力 1.5 倍）。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
+    id: 'gpt-6-sol',
+    provider: 'openai',
+    model: 'GPT-6 Sol',
+    inputPrice: 2,
+    cachedInputPrice: 0.2,
+    outputPrice: 10,
+    longContextInputPrice: 4,
+    longContextCachedInputPrice: 0.4,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-22',
+    notes:
+      '入力 272K トークン超は入力・キャッシュが 2 倍。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
+    id: 'gpt-6-luna',
+    provider: 'openai',
+    model: 'GPT-6 Luna',
+    inputPrice: 0.1,
+    cachedInputPrice: 0.01,
+    outputPrice: 0.5,
+    longContextInputPrice: 0.2,
+    longContextCachedInputPrice: 0.02,
+    contextWindow: 1_050_000,
+    releaseDate: '2026-09-22',
+    notes:
+      '入力 272K トークン超は入力・キャッシュが 2 倍。Batch / Flex は半額、Fast mode は 2 倍',
+  },
+  {
     id: 'gpt-5.6-sol',
     provider: 'openai',
     model: 'GPT-5.6 Sol',
@@ -707,6 +750,41 @@ export const PRICING_DATA: ModelPricing[] = [
 
   // Anthropic
   {
+    id: 'claude-opus-5-5',
+    provider: 'anthropic',
+    model: 'Claude Opus 5.5',
+    inputPrice: 4,
+    cachedInputPrice: 0.2,
+    outputPrice: 20,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-22',
+    notes:
+      'キャッシュヒットは入力の 0.05 倍。Fast mode は $8 / $40。1M コンテキストは標準単価',
+  },
+  {
+    id: 'claude-fable-5-1',
+    provider: 'anthropic',
+    model: 'Claude Fable 5.1',
+    inputPrice: 10,
+    cachedInputPrice: 0.25,
+    outputPrice: 50,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-01',
+    notes: 'キャッシュヒットは入力の 0.025 倍（Fable 5 の $1 から値下げ）',
+  },
+  {
+    id: 'claude-mythos-5-1-(limited-availability)',
+    provider: 'anthropic',
+    model: 'Claude Mythos 5.1 (limited availability)',
+    inputPrice: 10,
+    cachedInputPrice: 0.25,
+    outputPrice: 50,
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-01',
+    notes:
+      'Project Glasswing 参加者向けの限定提供。キャッシュヒットは入力の 0.025 倍',
+  },
+  {
     id: 'claude-opus-4-6',
     provider: 'anthropic',
     model: 'Claude Opus 4.6',
@@ -894,24 +972,6 @@ export const PRICING_DATA: ModelPricing[] = [
     contextWindow: 200_000,
   },
   {
-    id: 'claude-sonnet-5through-august-31,-2026',
-    provider: 'anthropic',
-    model: 'Claude Sonnet 5through August 31, 2026',
-    inputPrice: 2,
-    cachedInputPrice: 0.2,
-    outputPrice: 10,
-    contextWindow: 200_000,
-  },
-  {
-    id: 'claude-sonnet-5starting-september-1,-2026',
-    provider: 'anthropic',
-    model: 'Claude Sonnet 5starting September 1, 2026',
-    inputPrice: 3,
-    cachedInputPrice: 0.3,
-    outputPrice: 15,
-    contextWindow: 200_000,
-  },
-  {
     id: 'claude-sonnet-4-(retired,-except-on-bedrock-and-google-cloud)',
     provider: 'anthropic',
     model: 'Claude Sonnet 4 (retired, except on Bedrock and Google Cloud)',
@@ -1055,9 +1115,9 @@ export const PRICING_DATA: ModelPricing[] = [
       'text/image/video/audio 入力。Non-global リージョンは+10%（$1.65/M 等）。>200K で長文料金（標準と同額）',
   },
   {
-    id: 'gemini-3.6-flash',
+    id: 'gemini-3.8-flash-cyber',
     provider: 'google',
-    model: 'Gemini 3.6 Flash',
+    model: 'Gemini 3.8 Flash Cyber',
     inputPrice: 1.5,
     cachedInputPrice: 0.15,
     outputPrice: 7.5,
@@ -1065,7 +1125,50 @@ export const PRICING_DATA: ModelPricing[] = [
     longContextCachedInputPrice: 0.15,
     longContextOutputPrice: 7.5,
     contextWindow: 1_000_000,
-    notes: 'text/image/video/audio 入力。>200K で長文料金（標準と同額）',
+    notes:
+      'text/image/video/audio 入力。Non-global リージョンは+10%（$1.65/M 等）。>200K で長文料金（標準と同額）',
+  },
+  {
+    id: 'gemini-3.8-flash',
+    provider: 'google',
+    model: 'Gemini 3.8 Flash',
+    inputPrice: 0.75,
+    cachedInputPrice: 0.075,
+    outputPrice: 3.75,
+    longContextInputPrice: 0.75,
+    longContextCachedInputPrice: 0.075,
+    longContextOutputPrice: 3.75,
+    contextWindow: 1_000_000,
+    notes:
+      '2026-12-31 までの価格。2027-01-01 から $1.5 / $7.5（キャッシュ $0.15）。Non-global リージョンは+10%。>200K で長文料金（標準と同額）',
+  },
+  {
+    id: 'gemini-3.7-flash',
+    provider: 'google',
+    model: 'Gemini 3.7 Flash',
+    inputPrice: 0.75,
+    cachedInputPrice: 0.075,
+    outputPrice: 3.75,
+    longContextInputPrice: 0.75,
+    longContextCachedInputPrice: 0.075,
+    longContextOutputPrice: 3.75,
+    contextWindow: 1_000_000,
+    notes:
+      '2026-12-31 までの価格。2027-01-01 から $1.5 / $7.5（キャッシュ $0.15）。Non-global リージョンは+10%。>200K で長文料金（標準と同額）',
+  },
+  {
+    id: 'gemini-3.6-flash',
+    provider: 'google',
+    model: 'Gemini 3.6 Flash',
+    inputPrice: 0.75,
+    cachedInputPrice: 0.075,
+    outputPrice: 3.75,
+    longContextInputPrice: 0.75,
+    longContextCachedInputPrice: 0.075,
+    longContextOutputPrice: 3.75,
+    contextWindow: 1_000_000,
+    notes:
+      '2026-12-31 までの価格。2027-01-01 から $1.5 / $7.5（キャッシュ $0.15）。Non-global リージョンは+10%。>200K で長文料金（標準と同額）',
   },
   {
     id: 'gemini-3.5-flash-lite',
@@ -1244,6 +1347,16 @@ export const PRICING_DATA: ModelPricing[] = [
     contextWindow: 1_000_000,
     notes:
       'リアルタイム音声・映像対応。動画出力 $0.10/秒（約 $17.50/M video output tokens）。コンテキストウィンドウは公式ページに記載なし（参考値）',
+  },
+  {
+    id: 'gemini-omni-1.1-flash',
+    provider: 'google',
+    model: 'Gemini Omni 1.1 Flash',
+    inputPrice: 1.5,
+    outputPrice: 9,
+    contextWindow: 1_000_000,
+    notes:
+      'Gemini Omni Flash と同額。動画出力 $17.50/M video output tokens。コンテキストウィンドウは公式ページに記載なし（参考値）',
   },
   {
     id: 'gemini-deep-research-agent',

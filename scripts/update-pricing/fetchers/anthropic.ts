@@ -12,6 +12,18 @@ interface ModelInfo {
 
 // Known context windows and release dates (fallback if models page fails)
 const KNOWN_MODELS: Record<string, ModelInfo> = {
+  'Claude Fable 5.1': {
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-01',
+  },
+  'Claude Mythos 5.1 (limited availability)': {
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-01',
+  },
+  'Claude Opus 5.5': {
+    contextWindow: 1_000_000,
+    releaseDate: '2026-09-22',
+  },
   'Claude Opus 4.6': {
     contextWindow: 1_000_000,
     releaseDate: '2026-02-05',
@@ -75,10 +87,10 @@ export async function fetchAnthropic(): Promise<FetchResult> {
     let pricingTable: ReturnType<typeof $> | null = null;
 
     tables.each((_, table) => {
-      const headerText = $(table).find('th').text();
+      const headerText = $(table).find('th').text().toLowerCase();
       if (
-        headerText.includes('Base Input') ||
-        headerText.includes('Output Tokens')
+        headerText.includes('base input') ||
+        headerText.includes('output tokens')
       ) {
         pricingTable = $(table);
         return false;
@@ -94,6 +106,10 @@ export async function fetchAnthropic(): Promise<FetchResult> {
     rows.each((_, row) => {
       const cells = $(row).find('td');
       if (cells.length < 6) return;
+
+      // Footnote markers (e.g. "$0.25 / MTok<sup>1</sup>") would otherwise be
+      // concatenated into the price and parsed as 0.251.
+      cells.find('sup').remove();
 
       const rawName = $(cells[0])
         .text()
@@ -133,10 +149,10 @@ export async function fetchAnthropic(): Promise<FetchResult> {
 
     // Try to parse long context pricing table
     tables.each((_, table) => {
-      const headerText = $(table).find('th').text();
+      const headerText = $(table).find('th').text().toLowerCase();
       if (
         headerText.includes('200k input tokens') &&
-        headerText.includes('Input')
+        headerText.includes('input')
       ) {
         const lcRows = $(table).find('tbody tr');
         lcRows.each((_, row) => {

@@ -7,6 +7,9 @@ const PRICING_URL = 'https://developers.openai.com/docs/pricing';
 // Known context windows (not always on the pricing page).
 // Keys are slugify()'d model names, e.g. "GPT-5.6 Sol" -> "gpt-5-6-sol".
 const KNOWN_CONTEXT: Record<string, number> = {
+  'gpt-6-astra': 1_050_000,
+  'gpt-6-sol': 1_050_000,
+  'gpt-6-luna': 1_050_000,
   'gpt-5-6-sol': 1_050_000,
   'gpt-5-6-terra': 1_050_000,
   'gpt-5-6-luna': 1_050_000,
